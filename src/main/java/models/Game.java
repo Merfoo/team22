@@ -33,6 +33,9 @@ public class Game {
 
     public void dealFour() {
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
+        for(int i = 0; i < 4; i++){
+          this.addCardToCol(i, deck.remove(0));
+        }
     }
 
     public void remove(int columnNumber) {

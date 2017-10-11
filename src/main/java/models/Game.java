@@ -29,6 +29,18 @@ public class Game {
 
     public void shuffle() {
         // shuffles the deck so that it is random
+		Random rand = new Random(); //random number generator
+		
+		int index; //index of randomly chosen int
+		Card temp; //will hold deck[index] and be placed somewhere else within deck
+		
+		for(int i = deck.length - 1; i > 0; i--){ //for all cards in the deck
+			index = rand.nextInt(i + 1); //will select a random number from [0-(i+1)]
+			temp = deck[index]; //save random card
+			
+			deck[index] = deck[i]; //set random card to current card
+			deck[i] = temp; //set current card to random card
+		}
     }
 
     public void dealFour() {

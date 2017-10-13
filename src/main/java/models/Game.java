@@ -41,7 +41,11 @@ public class Game {
 
     private boolean columnHasCards(int columnNumber) {
         // check indicated column for number of cards; if no cards return false, otherwise return true
-        return false;
+        int columnSize = this.cols.get(columnNumber).size();
+        if (columnSize != 0)
+          return true;
+        else
+          return false;
     }
 
     private Card getTopCard(int columnNumber) {

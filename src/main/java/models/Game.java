@@ -32,6 +32,7 @@ public class Game {
 
     public void shuffle() {
         // shuffles the deck so that it is random
+        Collections.shuffle(deck); //Collections is a Java framework that allows operations methods such as shuffle onto certain objects.
     }
 
     public void dealFour() {

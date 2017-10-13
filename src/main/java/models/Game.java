@@ -16,6 +16,7 @@ public class Game {
 
     public Game(){
         // initialize a new game such that each column can store cards
+        if
         for (int i = 0; i < 4; i++){
             cols.add(i, new ArrayList<Card>());
         }
@@ -65,8 +66,10 @@ public class Game {
 
     public void move(int columnFrom, int columnTo) {
         // remove the top card from the columnFrom column, add it to the columnTo column
-        addCardToCol(columnTo, getTopCard(columnFrom));
-        removeCardFromCol(columnFrom);
+        if (columnHasCards(columnFrom)) {
+            addCardToCol(columnTo, getTopCard(columnFrom));
+            removeCardFromCol(columnFrom);
+        }
     }
 
     private void addCardToCol(int columnTo, Card cardToMove) {

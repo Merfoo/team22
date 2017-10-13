@@ -16,6 +16,9 @@ public class Game {
 
     public Game(){
         // initialize a new game such that each column can store cards
+        for (int i = 0; i < 4; i++){
+            cols.add(i, new ArrayList<Card>());
+        }
     }
 
     public void buildDeck() {
@@ -29,14 +32,21 @@ public class Game {
 
     public void shuffle() {
         // shuffles the deck so that it is random
+        Collections.shuffle(deck); //Collections is a Java framework that allows operations methods such as shuffle onto certain objects.
     }
 
     public void dealFour() {
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
+        for(int i = 0; i < 4; i++){
+          this.addCardToCol(i, deck.remove(0));
+        }
     }
 
     public void remove(int columnNumber) {
         // remove the top card from the indicated column
+        if (columnHasCards(columnNumber)) {
+            removeCardFromCol(columnNumber);
+        }
     }
 
     private boolean columnHasCards(int columnNumber) {
@@ -55,6 +65,10 @@ public class Game {
 
     public void move(int columnFrom, int columnTo) {
         // remove the top card from the columnFrom column, add it to the columnTo column
+        if (columnHasCards(columnFrom)) {
+            addCardToCol(columnTo, getTopCard(columnFrom));
+            removeCardFromCol(columnFrom);
+        }
     }
 
     private void addCardToCol(int columnTo, Card cardToMove) {

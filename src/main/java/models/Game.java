@@ -29,23 +29,7 @@ public class Game {
 
     public void shuffle() {
         // shuffles the deck so that it is random
-		Random rand = new Random(); //random number generator
-		
-		int index; //index of randomly chosen int
-		Card temp; //will hold deck[index] and be placed somewhere else within deck
-		
-		for(int i = deck.size() - 1; i > 0; i--){ //for all cards in the deck
-			index = rand.nextInt(i + 1); //will select a random number from [0-(i+1)]
-			temp = deck.get(i); //save random card
-			
-			deck.set(index, deck.get(i)); //set random card to current card
-			deck.set(i, temp); //set current card to random card
-		}
-		//System.out.print("test");
-		//System.out.print("deck size is: " + deck.size());
-        //for(int i = 0; i < 52; i++){
-        //    System.out.print("card " + i + ": " + deck.get(i).getValue());
-        //}
+        Collections.shuffle(deck); //Collections is a Java framework that allows operations methods such as shuffle onto certain objects.
     }
 
     public void dealFour() {

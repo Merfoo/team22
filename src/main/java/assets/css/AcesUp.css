@@ -1,18 +1,39 @@
 tr{
-width:500px;
+  width:500px;
 }
 
 td{
-width:100px;
-height:20px;
-text-align:center;
+  width:100px;
+  height:20px;
+  text-align:center;
 }
 
 .title{
-font-weight: bold;
+  font-weight: bold;
+}
+
+#gameTitle{
+  font-weight: bold;
+  font-size: 75px;
+  font-family: 'Russo One', sans-serif;
+  text-align: center;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .cardLocation{
-width: 100px;
-background-color:#F0F0F0;
+  width: 100px;
+  background-color:#F0F0F0;
+}
+
+.body{
+  background-color: green;
+}
+
+html {
+  /*Image Citation: Clouds Rain background from pptbackgrounds.org*/
+  background-image: url("cloudBackground3.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+
 }

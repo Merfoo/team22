@@ -68,17 +68,34 @@ html {
 
 .cardsContainer {
     display: flex;
+    height: 550px;
 }
 
 .cardColumn {
+    display: flex;
     flex-grow: 1;
+    flex-direction: column;
 }
 
 .cardsHolder {
-
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 500px;
 }
 
 .card {
-    background-color: blue;
     text-align: center;
+    padding: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.removeCardFromColumnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.removeCardFromColumn {
+
 }

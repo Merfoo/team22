@@ -44,12 +44,12 @@ html {
 
 .bottomBoxContent{
     flex: .5;
-    border: 1px solid #000;
+    /*border: 1px solid #000;*/
 }
 
 #bottomBox2{
     display: flex;
-    border: 1px solid #000;
+    /*border: 1px solid #000;*/
     flex: .5;
 }
 

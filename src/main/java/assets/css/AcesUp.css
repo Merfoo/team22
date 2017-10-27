@@ -21,11 +21,6 @@ td{
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-.cardLocation{
-  width: 100px;
-  background-color:#F0F0F0;
-}
-
 #bottomBox{
     display: flex;
 
@@ -87,5 +82,38 @@ html {
   background-image: url("cloudBackground3.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
+}
+
+.cardsContainer {
+    display: flex;
+    height: 550px;
+}
+
+.cardColumn {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.cardsHolder {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 500px;
+}
+
+.card {
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.removeCardFromColumnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.removeCardFromColumn {
 
 }

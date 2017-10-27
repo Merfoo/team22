@@ -1,18 +1,135 @@
 tr{
-width:500px;
+  width:500px;
 }
 
 td{
-width:100px;
-height:20px;
-text-align:center;
+  width:100px;
+  height:20px;
+  text-align:center;
 }
 
 .title{
-font-weight: bold;
+  font-weight: bold;
 }
 
-.cardLocation{
-width: 100px;
-background-color:#F0F0F0;
+.body{
+  background-color: green;
+}
+
+html {
+  /*Image Citation: Clouds Rain background from pptbackgrounds.org*/
+  background-image: url("cloudBackground3.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+}
+
+#gameTitle{
+  font-weight: bold;
+  font-size: 75px;
+  font-family: 'Russo One', sans-serif;
+  text-align: center;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+#bottomBox{
+    display: flex;
+}
+
+.bottomBoxContent{
+    flex: .5;
+    /*border: 1px solid #000;*/
+}
+
+#bottomBox2{
+    display: flex;
+    /*border: 1px solid #000;*/
+    flex: .5;
+}
+
+.bottomLeft{
+    position: none;
+    bottom: 0;
+    left: 0;
+}
+.openButtons{
+    background-color: white;
+    border: none;
+    padding: 12px 15px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.openButtons:hover {
+    background-color: #109AFF;
+}
+
+#dealButton{
+      /*position: relative;
+      /*right: 30px;
+      bottom: 30px;*/
+      margin: 0 0 0 100px;
+      height: 120px;
+      width: 120px;
+      border: none;
+      border-radius: 60px;
+      background-color: #109aff;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
+
+}
+
+#moveButton{
+    /*position: relative;
+    margin: 2px 0 30px 0;
+    float: right;
+    left: -40%;*/
+}
+
+#moveCards{
+    margin: 0 0 0 60px;
+}
+
+moveCardInput{
+    width: 20px;
+}
+.cardsContainer {
+    display: flex;
+    height: 550px;
+}
+
+.cardColumn {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.cardsHolder {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 500px;
+}
+
+.card {
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.removeCardFromColumnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dealButtonPlus{
+    position: relative;
+    bottom: 35px;
+    font-size: 150px;
 }

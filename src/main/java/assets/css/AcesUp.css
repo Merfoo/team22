@@ -26,6 +26,40 @@ td{
   background-color:#F0F0F0;
 }
 
+#bottomBox{
+    display: flex;
+
+}
+
+.bottomBoxContent{
+    display: flex;
+    border: 1px solid #000;
+    flex: .5;
+    flex-wrap: wrap;
+}
+
+#dealButton{
+      /*position: relative;
+      /*right: 30px;
+      bottom: 30px;*/
+      height: 120px;
+      width: 120px;
+      border: none;
+      border-radius: 60px;
+      background-color: #ff1010;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
+
+}
+
+
+.dealButtonPlus{
+    position: relative;
+    bottom: 35px;
+    font-size: 150px;
+}
+
 .body{
   background-color: green;
 }

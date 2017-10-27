@@ -32,10 +32,28 @@ td{
 }
 
 .bottomBoxContent{
-    display: flex;
     border: 1px solid #000;
     flex: .5;
-    flex-wrap: wrap;
+}
+
+.bottomLeft{
+    position: none;
+    bottom: 0;
+    left: 0;
+}
+.openButtons{
+    background-color: white;
+    border: none;
+    padding: 12px 15px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.openButtons:hover {
+    background-color: #109AFF;
 }
 
 #dealButton{

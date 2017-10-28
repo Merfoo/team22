@@ -114,6 +114,8 @@ html {
     justify-content: center;
 }
 
-.removeCardFromColumn {
-
+.dealButtonPlus{
+    position: relative;
+    bottom: 35px;
+    font-size: 150px;
 }

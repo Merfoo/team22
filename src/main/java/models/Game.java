@@ -4,15 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-/**
- * Assignment 1: Each of the blank methods below require implementation to get AcesUp to build/run
- */
 public class Game {
 
-    public java.util.List<Card> deck = new ArrayList<>();
-
     public java.util.List<java.util.List<Card>> cols = new ArrayList<>(4);
-
 
     public Game(){
         // initialize a new game such that each column can store cards
@@ -27,18 +21,6 @@ public class Game {
             deck.add(new Card(i,Suit.Hearts));
             deck.add(new Card(i,Suit.Diamonds));
             deck.add(new Card(i,Suit.Spades));
-        }
-    }
-
-    public void shuffle() {
-        // shuffles the deck so that it is random
-        Collections.shuffle(deck); //Collections is a Java framework that allows operations methods such as shuffle onto certain objects.
-    }
-
-    public void dealFour() {
-        // remove the top card from the deck and add it to a column; repeat for each of the four columns
-        for(int i = 0; i < 4; i++){
-          this.addCardToCol(i, deck.remove(0));
         }
     }
 

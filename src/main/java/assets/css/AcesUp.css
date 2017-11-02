@@ -18,7 +18,7 @@ td{
 
 html {
   /*Image Citation: Clouds Rain background from pptbackgrounds.org*/
-  background-image: url("cloudBackground3.jpg");
+  background-image: url("../images/cloudBackground3.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
 
@@ -121,6 +121,7 @@ moveCardInput{
 .cardsInColumnContainer {
     padding-left: 10px;
     padding-right: 10px;
+    text-align: center;
     flex: 1;
     overflow-y: auto;
 }
@@ -134,9 +135,15 @@ moveCardInput{
 
 .card {
     text-align: center;
-    padding: 10px;
-    margin-bottom: 5px;
+    padding: 2px;
     font-weight: bold;
+}
+
+/* Card images from http://acbl.mybigcommerce.com/52-playing-cards/ */
+.cardImg {
+    width: 225px;
+    height: 350px;
+    margin: 0 auto;
 }
 
 .dealButtonPlus{

@@ -89,16 +89,32 @@ html {
     height: 550px;
 }
 
-.cardColumn {
+.cardsColumn {
     display: flex;
     flex-grow: 1;
     flex-direction: column;
+    min-width: 25%;
 }
 
-.cardsHolder {
+.cardsColumnHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+}
+
+.cardsInColumnContainer {
     padding-left: 10px;
     padding-right: 10px;
-    height: 500px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.cardsColumnFooter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
 }
 
 .card {
@@ -106,12 +122,6 @@ html {
     padding: 10px;
     margin-bottom: 5px;
     font-weight: bold;
-}
-
-.removeCardFromColumnContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .dealButtonPlus{

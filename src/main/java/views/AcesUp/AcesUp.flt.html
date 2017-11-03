@@ -61,20 +61,94 @@
     </div>
     <div id="bottomBox">
         <div id="bottomBox1" class="bottomBoxContent">
-                <br><br><br><br><br><br>
-                <button id="openSettings" class="openButtons"><img src="/assets/images/settings.png" height="60" width="60"></button>
-                <button id="openHelp" class="openButtons"><img src="/assets/images/help.png" height="60" width="60"></button>
+            <br><br><br><br><br><br>
+            <button id="openSettings" class="openButtons"><img src="/assets/images/settings.png" height="60" width="60"></button>
+            <button id="openHelp" class="openButtons"><img src="/assets/images/help.png" height="60" width="60"></button>
         </div>
         <div id="bottomBox2" class="bottomBoxContent">
-            <button id="dealButton"><div class="dealButtonPlus">+</div></button>
-
-            <BR>Move from column <input type="text" id="from_col"  /> to <input type="text" id="to_col"  /> <button id="moveButton">Move</button>
+            <button id="dealButton" class=""><div class="dealButtonPlus ">+</div></button>
+            <div id="moveCards">
+                <button id="moveButton" class="floatCenter">Move</button>
+                <div>
+                    <input type="text" id="from_col" size="1" class="moveCardInput"/><div class="floatCenter">to</div><input type="text" id="to_col" size="1" class="moveCardInput"/>
+                </div>
+            </div>
         </div>
         <div id="bottomBox3" class="bottomBoxContent">
-            hello
+            <!--Placeholder-->
         </div>
     </div>
 </div>
+
+<div id="settingsModal" class="modal">
+    <div class="modalSettings">
+        <span class="closeButton">&times;</span>
+        <center>Settings</center><hr><br><br>
+    </div>
+
+</div>
+
+<div id="helpModal" class="modal">
+    <div class="modalContent">
+        <span class="closeButton">&times;</span>
+        <h3><center>Welcome to Aces Up! Solitaire</center></h3>
+        Bro, get ready to get skkkkkyyyy high in this perky version of Aces Up Solitaire!
+        <br><br>
+        <i>Why am I here?</i><br><br>
+        <b>Good sir/madam, you are here to fulfill your life purpose and remove all the cards
+            from a deck of cards!</b><br><br>
+        <ul>
+            <li>Strap on your aviator helmet and get ready to rock!</li>
+            <li>Four cards are dealt to each of the four columns! WOOOH!</li>
+            <li>Click on one of the mega rad cards to remove it!</li>
+            <li>A card can be removed if another one of its brothers or sisters of the same suit is
+                somewhere on a column just chillin! </li>
+            <li>A 2 is the lowest value while the Ace is the h-h-h-highest! That means that if you
+                wanna try and remove an Ace, it's impossible. So like, don't try it.</li>
+            <li>When one of the 4 marvelous stacks are empty, any card can be mega moved into
+                that wonderful little spot.</li>
+            <li>In order to play a perfect game, you gotta remove all the cards except for the
+                Aces!</li>
+            <li>YOU CAN DO IT, MAN! I believe in you. Your reality is conceived based on your pre-cognitive
+                thoughts so if you believe that you are capable of accomplishing the task set before you,
+                then you can bend reality to your will and get it done! Yeah yeah yeah!</li>
+        </ul>
+
+    </div>
+
+</div>
+<script>
+var modal = document.getElementById('helpModal');
+var s_modal = document.getElementById('settingsModal');
+var btn = document.getElementById("openHelp");
+var s_btn = document.getElementById("openSettings");
+var span = document.getElementsByClassName("closeButton")[0];
+
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+s_btn.onclick = function(){
+    s_modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+    if(event.target == s_modal){
+        s_modal.style.display = "none";
+    }
+}
+
+</script>
 <script>
 
 function createCardText(cardText) {

@@ -1,7 +1,7 @@
 package models;
 
 import java.util.ArrayList;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class CardColumn {
     public final java.util.List<Card> cards = new ArrayList<>();
@@ -14,7 +14,7 @@ public class CardColumn {
         cards.add(card);
     }
 
-    @JsonIgnoreProperties
+    @JsonIgnore
     public Card getTop() {
         return cards.get(cards.size() - 1);
     }

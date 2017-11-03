@@ -13,7 +13,7 @@ public class Game {
             cardColumns.add(new CardColumn());
         }
 
-//        dealFour();
+        deck.shuffle();
     }
 
 

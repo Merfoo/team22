@@ -25,10 +25,10 @@ public class Deck{
 
   public Card getTopCard() {
       // remove the top card from the deck and add it to a column; repeat for each of the four columns
-      return cards.get(cards.size());
+      return cards.get(cards.size() - 1);
   }
 
-  public bool hasCards() {
+  public boolean hasCards() {
       return cards.size() > 0;
   }
 

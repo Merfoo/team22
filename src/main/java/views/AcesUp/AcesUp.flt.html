@@ -97,11 +97,11 @@ function updateCards(game) {
         var column = $(".cardsInColumnContainer.column" + (i + 1))[0];
         column.innerHTML = "";
 
-        for(var j = 0; j < game.cols[i].length; j++) {
-            var card = game.cols[i][j];
+        for(var j = 0; j < game.cardColumns[i].cards.length; j++) {
+            var card = game.cardColumns[i].cards[j];
             var cardText = card.textRepresentation;
 
-            if(j < game.cols[i].length - 1)
+            if(j < game.cardColumns[i].cards.length - 1)
                 cardElement = createCardText(cardText);
 
             else
@@ -110,7 +110,7 @@ function updateCards(game) {
             column.appendChild(cardElement);
         }
 
-        if(game.cols[i].length > 0)
+        if(game.cardColumns[i].cards.length > 0)
             column.scrollTop = cardElement.offsetHeight + cardElement.offsetTop;
     }
 }

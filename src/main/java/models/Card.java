@@ -10,8 +10,6 @@ public class Card implements Serializable {
     public final Suit suit;
     public final String textRepresentation;
 
-    public java.util.List<java.util.List<Card>> cols = new ArrayList<>(4);
-
     @JsonCreator
     public Card(@JsonProperty("value") int value, @JsonProperty("suit") Suit suit) {
         this.value = value;

@@ -22,6 +22,9 @@ html {
   background-repeat: no-repeat;
   background-size: 100%;
 
+  font-family: 'Russo One', sans-serif;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 #gameTitle{
@@ -35,11 +38,16 @@ html {
 
 #bottomBox{
     display: flex;
-
 }
 
 .bottomBoxContent{
-    border: 1px solid #000;
+    flex: .5;
+    /*border: 1px solid #000;*/
+}
+
+#bottomBox2{
+    display: flex;
+    /*border: 1px solid #000;*/
     flex: .5;
 }
 
@@ -67,22 +75,48 @@ html {
       /*position: relative;
       /*right: 30px;
       bottom: 30px;*/
+      margin: 0 0 0 100px;
       height: 120px;
       width: 120px;
       border: none;
       border-radius: 60px;
-      background-color: #ff1010;
+      background-color: #109aff;
       color: #fff;
       cursor: pointer;
       box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
-
 }
-
+#dealButton:hover{
+    background-color: #1b5c8e;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+    /*box-shadow: offsetright offsetdown offsetsplatter color*/
+    height: 115px;
+    width: 115px;
+    border-radius: 65px;
+}
 
 .dealButtonPlus{
     position: relative;
-    bottom: 35px;
-    font-size: 150px;
+    bottom: 30px;
+    font-size: 130px;
+}
+
+.dealButtonPlus:hover{
+    font-size: 155px;
+}
+
+#moveButton{
+    /*position: relative;
+    margin: 2px 0 30px 0;
+    float: right;
+    left: -40%;*/
+}
+
+#moveCards{
+    margin: 0 0 0 60px;
+}
+
+moveCardInput{
+    width: 20px;
 }
 
 .cardsContainer {
@@ -132,8 +166,56 @@ html {
     margin: 0 auto;
 }
 
-.dealButtonPlus{
-    position: relative;
-    bottom: 35px;
-    font-size: 150px;
+
+
+/*Template used from w3schools.com, thank you!*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modalSettings{
+    background-color: white;
+    color: black;
+    text-shadow: none;
+    font-family: sans-serif;
+    border-radius: 20px;
+    border: 1px solid #888;
+    padding: 20px;
+    width: 40%;
+    margin: 10% auto;
+}
+
+.modalContent {
+    background-color: white;
+    color: black;
+    text-shadow: none;
+
+    font-family: sans-serif;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    border-radius: 30px;
+}
+.closeButton {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeButton:hover,
+.closeButton:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

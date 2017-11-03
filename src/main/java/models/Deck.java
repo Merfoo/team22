@@ -25,7 +25,9 @@ public class Deck{
 
   public Card getTopCard() {
       // remove the top card from the deck and add it to a column; repeat for each of the four columns
-      return cards.get(cards.size() - 1);
+      Card temp = cards.get(cards.size() - 1);
+      cards.remove(cards.size() - 1);
+      return temp;
   }
 
   public boolean hasCards() {

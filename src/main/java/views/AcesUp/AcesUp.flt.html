@@ -114,7 +114,8 @@ function updateCards(game) {
             column.appendChild(cardElement);
         }
 
-        column.scrollTop = cardElement.offsetHeight + cardElement.offsetTop;
+        if(game.cols[i].length > 0)
+            column.scrollTop = cardElement.offsetHeight + cardElement.offsetTop;
     }
 }
 

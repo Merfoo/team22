@@ -1,40 +1,36 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
 
 public class Game {
 
-    private java.util.List<java.util.List<Card>> cols = new ArrayList<>(4);
-    private Deck deck = new Deck();
+    public Deck deck = new Deck();
+    public java.util.List<CardColumn> cardColumns = new ArrayList<>();
 
     public Game(){
         // initialize a new game such that each column can store cards
         for (int i = 0; i < 4; i++){
-            cols.add(i, new ArrayList<Card>());
+            cardColumns.add(new CardColumn());
         }
+
+        deck.shuffle();
     }
 
 
     public void remove(int columnNumber) {
         // remove the top card from the indicated column
         if (columnHasCards(columnNumber)) {
-            removeCardFromCol(columnNumber);
+            cardColumns.get(columnNumber).removeTop();
         }
     }
 
     private boolean columnHasCards(int columnNumber) {
         // check indicated column for number of cards; if no cards return false, otherwise return true
-        int columnSize = this.cols.get(columnNumber).size();
-        if (columnSize != 0)
-          return true;
-        else
-          return false;
+        return cardColumns.get(columnNumber).hasCards();
     }
 
     private Card getTopCard(int columnNumber) {
-        return this.cols.get(columnNumber).get(this.cols.get(columnNumber).size()-1);
+        return cardColumns.get(columnNumber).getTop();
     }
 
 
@@ -46,11 +42,24 @@ public class Game {
         }
     }
 
+    public void dealFour() {
+        for(int i = 0; i < 4; i++) {
+            if(deck.hasCards()) {
+                // This is Fauzi's doing
+                Card topDog = deck.getTopCard();
+                cardColumns.get(i).add(topDog);
+            }
+
+            else
+                break;
+        }
+    }
+
     private void addCardToCol(int columnTo, Card cardToMove) {
-        cols.get(columnTo).add(cardToMove);
+        cardColumns.get(columnTo).add(cardToMove);
     }
 
     private void removeCardFromCol(int colFrom) {
-        this.cols.get(colFrom).remove(this.cols.get(colFrom).size()-1);
+        cardColumns.get(colFrom).removeTop();
     }
 }

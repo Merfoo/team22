@@ -35,16 +35,11 @@ html {
 
 #bottomBox{
     display: flex;
+
 }
 
 .bottomBoxContent{
-    flex: .5;
-    /*border: 1px solid #000;*/
-}
-
-#bottomBox2{
-    display: flex;
-    /*border: 1px solid #000;*/
+    border: 1px solid #000;
     flex: .5;
 }
 
@@ -72,31 +67,33 @@ html {
       /*position: relative;
       /*right: 30px;
       bottom: 30px;*/
-      margin: 0 0 0 100px;
       height: 120px;
       width: 120px;
       border: none;
       border-radius: 60px;
-      background-color: #109aff;
+      background-color: #ff1010;
       color: #fff;
       cursor: pointer;
       box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
 
 }
 
-#moveButton{
-    /*position: relative;
-    margin: 2px 0 30px 0;
-    float: right;
-    left: -40%;*/
+
+.dealButtonPlus{
+    position: relative;
+    bottom: 35px;
+    font-size: 150px;
 }
 
-#moveCards{
-    margin: 0 0 0 60px;
+.body{
+  background-color: green;
 }
 
-moveCardInput{
-    width: 20px;
+html {
+  /*Image Citation: Clouds Rain background from pptbackgrounds.org*/
+  background-image: url("cloudBackground3.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .cardsContainer {

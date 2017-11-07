@@ -16,10 +16,9 @@ public class Game {
         deck.shuffle();
     }
 
-
     public void remove(int columnNumber) {
         // remove the top card from the indicated column
-        if (columnHasCards(columnNumber)) {
+        if (columnHasCards(columnNumber) && canRemove(columnNumber)) {
             cardColumns.get(columnNumber).removeTop();
         }
     }
@@ -43,7 +42,7 @@ public class Game {
     }
 
     public void dealFour() {
-        for(int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             if(deck.hasCards()) {
                 // This is Fauzi's doing
                 Card topDog = deck.getTopCard();
@@ -61,5 +60,17 @@ public class Game {
 
     private void removeCardFromCol(int colFrom) {
         cardColumns.get(colFrom).removeTop();
+    }
+    
+    private boolean canRemove(int column){
+        boolean canRemove = false;
+        for (int i = 0; i < 4; i++){
+            if (i != column){
+                if (cardColumns.get(i).getTop().getSuit() == cardColumns.get(column).getTop().getSuit()){
+                    canRemove = true;
+                }
+            }
+        }
+        return canRemove;
     }
 }

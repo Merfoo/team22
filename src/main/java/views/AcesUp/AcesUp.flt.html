@@ -117,7 +117,7 @@
             var s_modal = document.getElementById('settingsModal');
             var btn = document.getElementById("openHelp");
             var s_btn = document.getElementById("openSettings");
-            var span = document.getElementsByClassName("closeButton")[0];
+            var spans = document.getElementsByClassName("closeButton");
 
             // When the user clicks on the button, open the modal
             btn.onclick = function() {
@@ -127,9 +127,21 @@
                 s_modal.style.display = "block";
             }
 
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function() {
-                modal.style.display = "none";
+            // Assign click events for each span elements (x) to close the respective modal
+            for(var i = 0; i < spans.length; i++) {
+                var span = spans[i];
+                
+                // When the user clicks on <span> (x), close the parent modal
+                span.onclick = function() {
+                    // Get the parent modal id that this span belongs to
+                    var spanModalId = this.parentElement.parentElement.id;
+
+                    if(spanModalId === modal.id)
+                        modal.style.display = "none";
+                    
+                    else if(spanModalId === s_modal.id)
+                        s_modal.style.display = "none";
+                }
             }
 
             // When the user clicks anywhere outside of the modal, close it

@@ -47,6 +47,7 @@ public class Game {
                 // This is Fauzi's doing
                 Card topDog = deck.getTopCard();
                 cardColumns.get(i).add(topDog);
+                deck.size()--;
             }
 
             else
@@ -61,7 +62,7 @@ public class Game {
     private void removeCardFromCol(int colFrom) {
         cardColumns.get(colFrom).removeTop();
     }
-    
+
     private boolean canRemove(int column){
         boolean canRemove = false;
         for (int i = 0; i < 4; i++){
@@ -72,5 +73,22 @@ public class Game {
             }
         }
         return canRemove;
+    }
+
+    public int finalScore(){
+      int finalScore;
+      //final score is equal to beginning card count - number of cards remaining in deck - number of cards remaining in each of the four columns
+      int numCardsinCols = 0;
+      int beginningCardCount = 52;
+      //sums number of remaining cards in each column
+      for(int i = 0; i < 4; i++){
+        numCardsinCols = numCardsinCols + cardColumns.get(i).cards.size();
+      }
+      finalScore = beginningCardCount - deck.size() - numCardsinCols;
+      return finalScore;
+      // console.log("inFinalScore");
+      // console.log(numCardsinCols);
+      // console.log(deck.size());
+      // console.log(finalScore);
     }
 }

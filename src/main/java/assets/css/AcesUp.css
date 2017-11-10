@@ -96,12 +96,14 @@ html {
 
 .dealButtonPlus{
     position: relative;
-    bottom: 30px;
-    font-size: 130px;
+    top: 50%;
+    transform: translateY(-60%);
+    font-size: 100px;
 }
 
 .dealButtonPlus:hover{
     font-size: 155px;
+    line-height: 115px;
 }
 
 #moveButton{

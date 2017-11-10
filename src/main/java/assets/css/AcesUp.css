@@ -232,3 +232,11 @@ moveCardInput{
     text-decoration: none;
     cursor: pointer;
 }
+
+.currentScoreContainer {
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    right: 50px;
+    bottom: 50px;
+}

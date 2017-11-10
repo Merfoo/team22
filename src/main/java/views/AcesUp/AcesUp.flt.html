@@ -71,6 +71,14 @@
                 </div>
                 <div id="bottomBox3" class="bottomBoxContent">
                     <div id="motivate_img"><img src="/assets/images/motivate.jpg" height="140" width="170"></div>
+                    <div class="currentScoreContainer">
+                        <div class="currentScoreTitle">
+                            Current Score:
+                        </div>
+                        <div id="currentScoreValue">
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -259,6 +267,9 @@
             function display(game) {
                 console.log(game);
                 updateCards(game);
+
+                // Update the current score
+                $("#currentScoreValue").html(game.score);
             }
 
             // Calls ApplicationController.gameGet()

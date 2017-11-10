@@ -70,6 +70,12 @@ public class Game {
 
     private boolean canRemoveTopCard(int column){
         boolean canRemove = false;
+
+        // If the top card is an Ace then we can't remove it
+        if(cardColumns.get(column).hasCards())
+            if(cardColumns.get(column).getTop().getValue() == 14)
+                return false;
+
         for (int i = 0; i < 4; i++){
             if (i != column && cardColumns.get(i).hasCards() && cardColumns.get(column).hasCards()){
                 if (cardColumns.get(i).getTop().getSuit() == cardColumns.get(column).getTop().getSuit()){

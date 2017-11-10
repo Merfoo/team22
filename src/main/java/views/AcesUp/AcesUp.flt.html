@@ -206,7 +206,7 @@
                     // Check if card may be removed. If it can, remove hidden CSS from
                     // Respective button.
                     var removeElem = "#Remove" + (i + 1);
-                    if (game.cardColumns[i].canRemove){
+                    if (game.cardColumns[i].canRemoveTopCard){
                         console.log("Column that can be removed: ", removeElem);
                         $(removeElem).removeClass("hidden");
                     }

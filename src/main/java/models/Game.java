@@ -7,6 +7,7 @@ public class Game {
     public Deck deck = new Deck();
     public java.util.List<CardColumn> cardColumns = new ArrayList<>();
     public int score = 0;
+    public boolean gameEnded = false;
 
     public Game(){
         // initialize a new game such that each column can store cards
@@ -16,15 +17,15 @@ public class Game {
         deck.shuffle();
     }
 
-    public int getScore(){return score;}
-
     public void remove(int columnNumber) {
         // remove the top card from the indicated column
         if (columnHasCards(columnNumber) && cardColumns.get(columnNumber).canRemoveTopCard) {
             cardColumns.get(columnNumber).removeTop();
         }
+
         updateColumnState();
         calculateScore();
+        checkEndGame();
     }
 
     private boolean columnHasCards(int columnNumber) {
@@ -43,7 +44,9 @@ public class Game {
             addCardToCol(columnTo, getTopCard(columnFrom));
             removeCardFromCol(columnFrom);
         }
+
         updateColumnState();
+        checkEndGame();
     }
 
     public void dealFour() {
@@ -56,8 +59,10 @@ public class Game {
             else
                 break;
         }
+
         updateColumnState();
         calculateScore();
+        checkEndGame();
     }
 
     private void addCardToCol(int columnTo, Card cardToMove) {
@@ -79,6 +84,33 @@ public class Game {
         }
 
         return canRemove;
+    }
+
+    // This checks if the game has ended by checking if the deck size is 0
+    // and the user can make any moves or removes
+    private void checkEndGame() {
+        gameEnded = false;
+
+        if (deck.size() == 0){
+            boolean movesAvailable = false;
+
+            // Loops through each column checking if a card can be removed/moved
+            // if so, then there are moves available to the user
+            for (int i = 0; i < cardColumns.size(); i++) {
+                if (cardColumns.get(i).canRemoveTopCard) {
+                    movesAvailable = true;
+                    break;
+                }
+
+                if (cardColumns.get(i).canMoveAce) {
+                    movesAvailable = true;
+                    break;
+                }
+            }
+
+            // If there are moves available, then the game has NOT ended
+            gameEnded = !movesAvailable;
+        }
     }
 
     // Update cardColumn element with canRemove and canMove member variables
@@ -111,7 +143,7 @@ public class Game {
         }
     }
       
-    public void calculateScore(){
+    private void calculateScore(){
         //final score is equal to beginning card count - number of cards remaining in deck - number of cards remaining in each of the four columns
         int numCardsinCols = 0;
         int beginningCardCount = 52;

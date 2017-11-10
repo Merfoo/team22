@@ -68,15 +68,9 @@
                 </div>
                 <div id="bottomBox2" class="bottomBoxContent">
                     <button id="dealButton" class=""><div class="dealButtonPlus ">+</div></button>
-                    <div id="moveCards">
-                        <button id="moveButton" class="floatCenter">Move</button>
-                        <div>
-                            <input type="text" id="from_col" size="1" class="moveCardInput"/><div class="floatCenter">to</div><input type="text" id="to_col" size="1" class="moveCardInput"/>
-                        </div>
-                    </div>
                 </div>
                 <div id="bottomBox3" class="bottomBoxContent">
-                    <!--Placeholder-->
+                    <div id="motivate_img"><img src="/assets/images/motivate.jpg" height="140" width="170"></div>
                 </div>
             </div>
         </div>
@@ -85,6 +79,7 @@
             <div class="modalSettings">
                 <span class="closeButton">&times;</span>
                 <center>Settings</center><hr><br><br>
+                <center><input type="checkbox" value="" id="motivate">Add Motivation</></center>
             </div>
         </div>
 
@@ -122,6 +117,17 @@
             var btn = document.getElementById("openHelp");
             var s_btn = document.getElementById("openSettings");
             var spans = document.getElementsByClassName("closeButton");
+            var motivate = document.getElementById("motivate");
+            var motivate_img = document.getElementById("motivate_img");
+
+            motivate.onclick = function() {
+                if(motivate_img.style.display === "block"){
+                    motivate_img.style.display = "none";
+                }
+                else{
+                    motivate_img.style.display = "block";
+                }
+            }
 
             // When the user clicks on the button, open the modal
             btn.onclick = function() {
@@ -174,6 +180,7 @@
                 img.style.top = top + "px";
                 return img
             }
+            
             // <div id="Empty1" class="emptyCard hidden"></div>
             function createEmptyCard(colIndex){
                 var elem = document.createElement("div");

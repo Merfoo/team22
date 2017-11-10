@@ -56,13 +56,13 @@
                     </div>
                 </div>
             </div>
-            <div id="bottomBox">
+             <div id="bottomBox">
                 <div id="bottomBox1" class="bottomBoxContent">
                     <br><br><br><br><br><br>
                     <button id="openSettings" class="openButtons"><img src="/assets/images/settings.png" height="60" width="60"></button>
                     <button id="openHelp" class="openButtons"><img src="/assets/images/help.png" height="60" width="60"></button>
                 </div>
-                <div id="bottomBox2" class="bottomBoxContent">
+                 <div id="bottomBox2" class="bottomBoxContent">
                     <button id="dealButton" class=""><div class="dealButtonPlus ">+</div></button>
                     <div id="moveCards">
                         <button id="moveButton" class="floatCenter">Move</button>
@@ -72,7 +72,8 @@
                     </div>
                 </div>
                 <div id="bottomBox3" class="bottomBoxContent">
-                    <!--Placeholder-->
+                    <!--Placeholder-->  <div id="motivate_img"><img src="/assets/images/motivate.jpg" height="140" width="170"></div>
+
                 </div>
             </div>
         </div>
@@ -81,6 +82,7 @@
             <div class="modalSettings">
                 <span class="closeButton">&times;</span>
                 <center>Settings</center><hr><br><br>
+                <center><input type="checkbox" value="" id="motivate">Add Motivation</></center>
             </div>
         </div>
 
@@ -118,6 +120,22 @@
             var btn = document.getElementById("openHelp");
             var s_btn = document.getElementById("openSettings");
             var spans = document.getElementsByClassName("closeButton");
+
+            var motivate = document.getElementById("motivate");
+
+            var motivate_img = document.getElementById("motivate_img");
+
+            motivate.onclick = function() {
+                console.log(motivate_img.style.display);
+
+                if(motivate_img.style.display === "block"){
+                    motivate_img.style.display = "none";
+                }
+                else{
+                      motivate_img.style.display = "block";
+                }
+
+            }
 
             // When the user clicks on the button, open the modal
             btn.onclick = function() {

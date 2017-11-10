@@ -78,7 +78,8 @@ public class Game {
 
         for (int i = 0; i < 4; i++){
             if (i != column && cardColumns.get(i).hasCards() && cardColumns.get(column).hasCards()){
-                if (cardColumns.get(i).getTop().getSuit() == cardColumns.get(column).getTop().getSuit()){
+                if (cardColumns.get(i).getTop().getSuit() == cardColumns.get(column).getTop().getSuit() &&
+                    cardColumns.get(i).getTop().getValue() > cardColumns.get(column).getTop().getValue()){
                     canRemove = true;
                 }
             }

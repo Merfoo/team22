@@ -202,6 +202,16 @@
                     // Set the scrollbar to show the latest card if cards exist
                     if(game.cardColumns[i].cards.length > 0)
                         column.scrollTop = cardElement.offsetHeight + cardElement.offsetTop;
+ 
+                    // Check if card may be removed. If it can, remove hidden CSS from
+                    // Respective button.
+                    var removeElem = "#Remove" + (i + 1);
+                    if (game.cardColumns[i].canRemove){
+                        console.log("Column that can be removed: ", removeElem);
+                        $(removeElem).removeClass("hidden");
+                    }
+                    else
+                        $(removeElem).addClass("hidden");
                 }
             }
 

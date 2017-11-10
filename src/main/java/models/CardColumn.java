@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class CardColumn {
     public final java.util.List<Card> cards = new ArrayList<>();
+    public boolean canRemove = false;
+    public boolean canMove = false;
 
     public CardColumn() {
 

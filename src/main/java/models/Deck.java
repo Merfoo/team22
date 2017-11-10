@@ -33,4 +33,6 @@ public class Deck{
     public boolean hasCards() {
         return cards.size() > 0;
     }
+
+    public int size() { return cards.size(); }
 }

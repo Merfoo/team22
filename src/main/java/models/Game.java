@@ -12,7 +12,6 @@ public class Game {
         for (int i = 0; i < 4; i++){
             cardColumns.add(new CardColumn());
         }
-
         deck.shuffle();
     }
 
@@ -21,6 +20,7 @@ public class Game {
         if (columnHasCards(columnNumber) && canRemove(columnNumber)) {
             cardColumns.get(columnNumber).removeTop();
         }
+        updateColumnState();
     }
 
     private boolean columnHasCards(int columnNumber) {
@@ -39,6 +39,7 @@ public class Game {
             addCardToCol(columnTo, getTopCard(columnFrom));
             removeCardFromCol(columnFrom);
         }
+        updateColumnState();
     }
 
     public void dealFour() {
@@ -48,10 +49,10 @@ public class Game {
                 Card topDog = deck.getTopCard();
                 cardColumns.get(i).add(topDog);
             }
-
             else
                 break;
         }
+        updateColumnState();
     }
 
     private void addCardToCol(int columnTo, Card cardToMove) {
@@ -72,5 +73,26 @@ public class Game {
             }
         }
         return canRemove;
+    }
+
+    private boolean canMove(int column){
+        return true;
+    }
+
+    // Update cardColumn element with canRemove and canMove member variables
+    // Called every time game state is updated
+    private void updateColumnState(){
+        for (int i = 0; i < 4; i++){
+            if (canRemove(i)){
+                cardColumns.get(i).canRemove = true;
+            }
+            else
+                cardColumns.get(i).canRemove = false;
+            if (canMove(i)){
+                cardColumns.get(i).canMove = true;
+            }
+            else
+                cardColumns.get(i).canMove = false;
+        }
     }
 }

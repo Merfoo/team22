@@ -171,7 +171,9 @@ moveCardInput{
     height: 175px;    /* original 350px */
 }
 
-
+.hidden {
+    display: none;
+}
 
 /*Template used from w3schools.com, thank you!*/
 .modal {

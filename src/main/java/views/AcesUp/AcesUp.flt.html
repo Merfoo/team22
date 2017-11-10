@@ -154,19 +154,20 @@
                 }
             }
 
-            // Creates and returns a div with the card text inside of it
-            function createCardText(cardText) {
-                var div = document.createElement("div");
-                div.classList.add("card");
-                div.innerHTML = cardText;
-                return div;
-            }
-
             // Creates and returns an img corresponding to the card text
-            function createCardImg(cardText) {
+            function createCardImg(cardText, zIndex, top) {
                 var img = document.createElement("img");
                 img.classList.add("cardImg");
                 img.src = "/assets/images/cards/" + cardText + ".png";
+
+                // zIndex is the layer that the card will belong to,
+                // the bigger the zIndex the higher the layer,
+                // highest layer will be displayed over lower layer
+                img.style.zIndex = zIndex;
+
+                // The distance from the top of the container the img should
+                // be placed
+                img.style.top = top + "px";
                 return img
             }
 
@@ -191,13 +192,8 @@
                         // Get the card text from the current card
                         var cardText = card.textRepresentation;
 
-                        // Create div with card text if its not the last card
-                        if(j < game.cardColumns[i].cards.length - 1)
-                            cardElement = createCardText(cardText);
-
-                        // Create img corresponding to the card text if its the last card
-                        else
-                            cardElement = createCardImg(cardText);
+                        // Generate img element based on card type
+                        cardElement = createCardImg(cardText, j, j * 33);
 
                         // Add the card element to the column element
                         column.appendChild(cardElement);

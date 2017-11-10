@@ -144,6 +144,9 @@ moveCardInput{
     text-align: center;
     flex: 1;
     overflow-y: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 .cardsColumnFooter {
@@ -161,9 +164,9 @@ moveCardInput{
 
 /* Card images from http://acbl.mybigcommerce.com/52-playing-cards/ */
 .cardImg {
-    width: 225px;
-    height: 350px;
-    margin: 0 auto;
+    position: absolute;
+    width: 112.5px;   /* original 225px */
+    height: 175px;    /* original 350px */
 }
 
 

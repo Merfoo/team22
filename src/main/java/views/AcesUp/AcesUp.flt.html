@@ -19,7 +19,8 @@
 
                     </div>
                     <div class="cardsColumnFooter">
-                        <button id="Remove1" class="removeCardFromColumn">Column1</button>
+                        <button id="Move1" class="moveCardFromColumn">Move</button>
+                        <button id="Remove1" class="removeCardFromColumn">Remove</button>
                     </div>
                 </div>
                 <div class="cardsColumn">
@@ -30,7 +31,8 @@
 
                     </div>
                     <div class="cardsColumnFooter">
-                        <button id="Remove2" class="removeCardFromColumn">Column2</button>
+                        <button id="Move2" class="moveCardFromColumn">Move</button>
+                        <button id="Remove2" class="removeCardFromColumn">Remove</button>
                     </div>
                 </div>
                 <div class="cardsColumn">
@@ -41,7 +43,8 @@
 
                     </div>
                     <div class="cardsColumnFooter">
-                        <button id="Remove3" class="removeCardFromColumn">Column3</button>
+                        <button id="Move3" class="moveCardFromColumn">Move</button>
+                        <button id="Remove3" class="removeCardFromColumn">Remove</button>
                     </div>
                 </div>
                 <div class="cardsColumn">
@@ -52,17 +55,18 @@
 
                     </div>
                     <div class="cardsColumnFooter">
-                        <button id="Remove4" class="removeCardFromColumn">Column4</button>
+                        <button id="Move4" class="moveCardFromColumn">Move</button>
+                        <button id="Remove4" class="removeCardFromColumn">Remove</button>
                     </div>
                 </div>
             </div>
-             <div id="bottomBox">
+            <div id="bottomBox">
                 <div id="bottomBox1" class="bottomBoxContent">
                     <br><br><br><br><br><br>
                     <button id="openSettings" class="openButtons"><img src="/assets/images/settings.png" height="60" width="60"></button>
                     <button id="openHelp" class="openButtons"><img src="/assets/images/help.png" height="60" width="60"></button>
                 </div>
-                 <div id="bottomBox2" class="bottomBoxContent">
+                <div id="bottomBox2" class="bottomBoxContent">
                     <button id="dealButton" class=""><div class="dealButtonPlus ">+</div></button>
                     <div id="moveCards">
                         <button id="moveButton" class="floatCenter">Move</button>
@@ -72,8 +76,7 @@
                     </div>
                 </div>
                 <div id="bottomBox3" class="bottomBoxContent">
-                    <!--Placeholder-->  <div id="motivate_img"><img src="/assets/images/motivate.jpg" height="140" width="170"></div>
-
+                    <!--Placeholder-->
                 </div>
             </div>
         </div>
@@ -82,7 +85,6 @@
             <div class="modalSettings">
                 <span class="closeButton">&times;</span>
                 <center>Settings</center><hr><br><br>
-                <center><input type="checkbox" value="" id="motivate">Add Motivation</></center>
             </div>
         </div>
 
@@ -120,22 +122,6 @@
             var btn = document.getElementById("openHelp");
             var s_btn = document.getElementById("openSettings");
             var spans = document.getElementsByClassName("closeButton");
-
-            var motivate = document.getElementById("motivate");
-
-            var motivate_img = document.getElementById("motivate_img");
-
-            motivate.onclick = function() {
-                console.log(motivate_img.style.display);
-
-                if(motivate_img.style.display === "block"){
-                    motivate_img.style.display = "none";
-                }
-                else{
-                      motivate_img.style.display = "block";
-                }
-
-            }
 
             // When the user clicks on the button, open the modal
             btn.onclick = function() {
@@ -188,6 +174,21 @@
                 img.style.top = top + "px";
                 return img
             }
+            // <div id="Empty1" class="emptyCard hidden"></div>
+            function createEmptyCard(colIndex){
+                var elem = document.createElement("div");
+                elem.classList.add("cardImg");
+                elem.classList.add("emptyCard");
+                // elem.classList.add("hidden");
+                elem.addEventListener("click", function (){
+                    if (fromColumn != -1){
+                        moveCard(fromColumn, colIndex);
+                        fromColumn = -1;
+                    }
+                    console.log("Element Clicked!");
+                });
+                return elem;
+            }
 
             // Updates the gui to the cards in the game
             function updateCards(game) {
@@ -202,6 +203,10 @@
                     // Reset the column to a blank state
                     column.innerHTML = "";
 
+                    if (game.cardColumns[i].cards.length === 0) {
+                        cardElement = createEmptyCard(i);
+                        column.appendChild(cardElement);
+                    }
                     // Loop over each card in the column
                     for(var j = 0; j < game.cardColumns[i].cards.length; j++) {
                         // Get the card in the column
@@ -225,7 +230,13 @@
                     // Respective button.
                     var removeElem = "#Remove" + (i + 1);
                     if (game.cardColumns[i].canRemoveTopCard){
-                        console.log("Column that can be removed: ", removeElem);
+                        $(removeElem).removeClass("hidden");
+                    }
+                    else
+                        $(removeElem).addClass("hidden");
+
+                    removeElem = "#Move" + (i + 1);
+                    if (game.cardColumns[i].canMoveAce) {
                         $(removeElem).removeClass("hidden");
                     }
                     else
@@ -235,6 +246,7 @@
 
             // The current state of the game
             var game;
+            var fromColumn = -1;
 
             // Updates the gui
             function display(game) {
@@ -280,6 +292,12 @@
                 });
             }
 
+            function highlightEmpty() {
+                $(".emptyCard").each(function (index, elem){
+                    elem.classList.add("moveToColumn");
+                })
+            }
+
             // Remove a card from the 1st column on click
             $("#Remove1").click(function(){
                 removeCard(0);
@@ -300,11 +318,32 @@
                 removeCard(3);
             });
 
-            // Move a card from one column to another on click
-            $("#moveButton").click(function(){
-                var colFrom = $("#from_col").val();
-                var colTo = $("#to_col").val();
+            // Move top card from the 1st column on click
+            $("#Move1").click(function () {
+                fromColumn = 0;
+                highlightEmpty();
+            });
 
+            // Move top card from the 2nd column on click
+            $("#Move2").click(function () {
+                fromColumn = 1;
+                highlightEmpty();
+            });
+
+            // Move top card from the 3rd column on click
+            $("#Move3").click(function () {
+                fromColumn = 2;
+                highlightEmpty();
+            });
+
+            // Move top card from the 4th column on click
+            $("#Move4").click(function () {
+                fromColumn = 3;
+                highlightEmpty();
+            });
+
+            // Move a card from one column to another on click
+            function moveCard(colFrom, colTo){
                 $.ajax({
                     type: "POST",
                     url: "/moveCard/" + colFrom + "/" +colTo,
@@ -317,7 +356,7 @@
                     contentType:"application/json; charset=utf-8",
                     dataType:"json",
                 });
-            });
+            }
         </script>
     </body>
 </html>

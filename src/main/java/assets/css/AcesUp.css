@@ -19,7 +19,7 @@ td{
 html {
   /*Image Citation: Clouds Rain background from pptbackgrounds.org*/
   background-image: url("../images/cloudBackground3.jpg");
-  background-repeat: no-repeat;
+  background-repeat: no-repeat center center fixed;
   background-size: 100%;
 
   font-family: 'Russo One', sans-serif;

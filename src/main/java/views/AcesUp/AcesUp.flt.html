@@ -91,6 +91,13 @@
             </div>
         </div>
 
+        <div id="winModal" class="modal">
+            <div class="modalContent">
+                <h1><center>MY DUDE, YOU WON!</center></h1><hr><br><br>
+                <center>Reload the page to play again!</center><br><br>
+            </div>
+        </div>
+
         <div id="helpModal" class="modal">
             <div class="modalContent">
                 <span class="closeButton">&times;</span>
@@ -132,6 +139,7 @@
             var spans = document.getElementsByClassName("closeButton");
             var motivate = document.getElementById("motivate");
             var motivate_img = document.getElementById("motivate_img");
+            var win_modal = document.getElementById('winModal');
 
             motivate.onclick = function() {
                 if(motivate_img.style.display === "block"){
@@ -275,6 +283,9 @@
 
                 // Update the current score
                 $("#currentScoreValue").html(game.score);
+                if(game.score >= 48){
+                    win_modal.style.display = "block";
+                }
             }
 
             // Calls ApplicationController.gameGet()

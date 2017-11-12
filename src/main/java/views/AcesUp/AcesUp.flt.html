@@ -96,7 +96,6 @@
             </div>
         </div>
 
-
         <div id="helpModal" class="modal">
             <div class="modalContent">
                 <span class="closeButton">&times;</span>
@@ -285,15 +284,16 @@
                 $("#currentScoreValue").html(game.score);
                 if(game.gameEnded){
                     if(game.score == 48){
-                        win_text.innerHTML += '<h1><center>MY DUDE, YOU WON!</center></h1><hr><br><br><center>Your final score is 48 points!</center><br><center>Reload the page to play again!</center><br><br>';
-                        win_modal.style.display = "block";
+                        win_text.innerHTML += '<h1><center>MY DUDE, YOU WON!</center></h1><hr><br><br>';
+                        win_text.innerHTML += '<center>Your final score is 48 points!</center><br>';
+                        win_text.innerHTML += '<center>Reload the page to play again!</center><br><br>';
                     }
                     else{
                         win_text.innerHTML += '<h1><center>Oh noes, you lost! ;(</center></h1><hr><br><br>';
                         win_text.innerHTML += '<center>Your final score is ' + game.score + ' point(s)!</center>';
                         win_text.innerHTML += '<br><center>Reload the page to play again!</center><br><br>';
-                        win_modal.style.display = "block";
                     }
+                    win_modal.style.display = "block";
                 }
             }
 

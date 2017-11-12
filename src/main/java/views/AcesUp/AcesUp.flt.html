@@ -1,167 +1,405 @@
-
+<!DOCTYPE html>
 <html>
+    <link href="/assets/css/AcesUp.css" rel="stylesheet">
+    <script type="text/javascript" src="/assets/webjars/jquery/2.1.3/jquery.js"></script>
+    <!-- for game title font -->
+    <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
 
+    <body>
+        <div>
+            <div>
+                <h1 id="gameTitle"> Aces Up! Solitare </h1>
+            </div>
+            <div class="cardsContainer">
+                <div class="cardsColumn">
+                    <div class="cardsColumnHeader">
+                        <p>Column 1</p>
+                    </div>
+                    <div class="cardsInColumnContainer column1">
 
-<link href="/assets/css/AcesUp.css" rel="stylesheet">
-<script type="text/javascript" src="/assets/webjars/jquery/2.1.3/jquery.js"></script>
-<!-- for game title font -->
-<link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+                    </div>
+                    <div class="cardsColumnFooter">
+                        <button id="Move1" class="moveCardFromColumn">Move</button>
+                        <button id="Remove1" class="removeCardFromColumn">Remove</button>
+                    </div>
+                </div>
+                <div class="cardsColumn">
+                    <div class="cardsColumnHeader">
+                        <p>Column 2</p>
+                    </div>
+                    <div class="cardsInColumnContainer column2">
 
+                    </div>
+                    <div class="cardsColumnFooter">
+                        <button id="Move2" class="moveCardFromColumn">Move</button>
+                        <button id="Remove2" class="removeCardFromColumn">Remove</button>
+                    </div>
+                </div>
+                <div class="cardsColumn">
+                    <div class="cardsColumnHeader">
+                        <p>Column 3</p>
+                    </div>
+                    <div class="cardsInColumnContainer column3">
 
-<body>
-<div>
-    <div>
-        <h1 id="gameTitle"> Aces Up! Solitare </h1>
-    </div>
-    <div class="cardsContainer">
-        <div class="cardColumn">
-            <div class="cardsHolder column1">
+                    </div>
+                    <div class="cardsColumnFooter">
+                        <button id="Move3" class="moveCardFromColumn">Move</button>
+                        <button id="Remove3" class="removeCardFromColumn">Remove</button>
+                    </div>
+                </div>
+                <div class="cardsColumn">
+                    <div class="cardsColumnHeader">
+                        <p>Column 4</p>
+                    </div>
+                    <div class="cardsInColumnContainer column4">
 
+                    </div>
+                    <div class="cardsColumnFooter">
+                        <button id="Move4" class="moveCardFromColumn">Move</button>
+                        <button id="Remove4" class="removeCardFromColumn">Remove</button>
+                    </div>
+                </div>
             </div>
-            <div class="removeCardFromColumnContainer">
-                <button id="Remove1" class="removeCardFromColumn">Column1</button>
-            </div>
-        </div>
-        <div class="cardColumn">
-            <div class="cardsHolder column2">
+            <div id="bottomBox">
+                <div id="bottomBox1" class="bottomBoxContent">
+                    <br><br><br><br><br><br>
+                    <button id="openSettings" class="openButtons"><img src="/assets/images/settings.png" height="60" width="60"></button>
+                    <button id="openHelp" class="openButtons"><img src="/assets/images/help.png" height="60" width="60"></button>
+                </div>
+                <div id="bottomBox2" class="bottomBoxContent">
+                    <div id="dealButton">+</div>
+                </div>
+                <div id="bottomBox3" class="bottomBoxContent">
+                    <div id="motivate_img"><img src="/assets/images/motivate.jpg" height="140" width="170"></div>
+                    <div class="currentScoreContainer">
+                        <div class="currentScoreTitle">
+                            Current Score:
+                        </div>
+                        <div id="currentScoreValue">
 
-            </div>
-            <div class="removeCardFromColumnContainer">
-                <button id="Remove2" class="removeCardFromColumn">Column2</button>
-            </div>
-        </div>
-        <div class="cardColumn">
-            <div class="cardsHolder column3">
-
-            </div>
-            <div class="removeCardFromColumnContainer">
-                <button id="Remove3" class="removeCardFromColumn">Column3</button>
-            </div>
-        </div>
-        <div class="cardColumn">
-            <div class="cardsHolder column4">
-
-            </div>
-            <div class="removeCardFromColumnContainer">
-                <button id="Remove4" class="removeCardFromColumn">Column4</button>
-            </div>
-        </div>
-    </div>
-    <div id="bottomBox">
-        <div id="bottomBox1" class="bottomBoxContent">
-            <br><br><br><br><br><br>
-            <button id="openSettings" class="openButtons"><img src="/assets/images/settings.png" height="60" width="60"></button>
-            <button id="openHelp" class="openButtons"><img src="/assets/images/help.png" height="60" width="60"></button>
-        </div>
-        <div id="bottomBox2" class="bottomBoxContent">
-            <button id="dealButton" class=""><div class="dealButtonPlus ">+</div></button>
-            <div id="moveCards">
-                <button id="moveButton" class="floatCenter">Move</button>
-                <div>
-                    <input type="text" id="from_col" size="1" class="moveCardInput"/><div class="floatCenter">to</div><input type="text" id="to_col" size="1" class="moveCardInput"/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="bottomBox3" class="bottomBoxContent">
-            <!--Placeholder-->
+
+        <div id="settingsModal" class="modal">
+            <div class="modalSettings">
+                <span class="closeButton">&times;</span>
+                <center>Settings</center><hr><br><br>
+                <center><input type="checkbox" value="" id="motivate">Add Motivation</input></center>
+            </div>
         </div>
-    </div>
-</div>
-<script>
 
-function createCardDiv(cardText) {
-    var div = document.createElement("div");
-    div.classList.add("card");
-    div.innerHTML = cardText;
-    return div;
-}
+        <div id="winModal" class="modal">
+            <div id="winText" class="modalContent">
+            </div>
+        </div>
 
-function updateCards(game) {
-    for(var i = 0; i < 4; i++) {
-        var column = $(".cardsHolder.column" + (i + 1))[0];
-        column.innerHTML = "";
+        <div id="helpModal" class="modal">
+            <div class="modalContent">
+                <span class="closeButton">&times;</span>
+                <h3><center>Welcome to Aces Up! Solitaire</center></h3>
+                Bro, get ready to get skkkkkyyyy high in this perky version of Aces Up Solitaire!
+                <br><br>
+                <i>Why am I here?</i><br><br>
+                <b>Good sir/madam, you are here to fulfill your life purpose and remove all the cards
+                    from a deck of cards!</b><br><br>
+                <ul>
+                    <li>Strap on your aviator helmet and get ready to rock!</li>
+                    <li>Four cards are dealt to each of the four columns! WOOOH!</li>
+                    <li>Click on one of the mega rad cards to remove it!</li>
+                    <li>A card can be removed if another one of its brothers or sisters of the same suit is
+                        somewhere on a column just chillin! If you are capable of removing a card, a remove
+                        button will appear under the column! Click that bad boy and BAM! It dissapears into
+                        the night.</li>
+                    <li>A 2 is the lowest value while the Ace is the h-h-h-highest! That means that if you
+                        wanna try and remove an Ace, it's impossible. So like, don't try it.</li>
+                    <li>When one of the 4 marvelous stacks are empty, you have the mega ability to mega move
+                        an ace (and only an ace) to that specific spot, Charles! If you can move it, a move
+                        button will show up under the column! Click that bad boy and then the empty column
+                        that you want to move it to!</li>
+                    <li>In order to play a perfect game, you gotta remove all the cards except for the
+                        Aces! For every card you remove, you get 1 point added to your score. Get 48 points
+                        to win! LET'S DO IT!</li>
+                    <li>YOU CAN DO IT, MAN! I believe in you. Your reality is conceived based on your pre-cognitive
+                        thoughts so if you believe that you are capable of accomplishing the task set before you,
+                        then you can bend reality to your will and get it done! Yeah yeah yeah!</li>
+                </ul>
+            </div>
+        </div>
 
-        for(var j = 0; j < game.cols[i].length; j++) {
-            var card = game.cols[i][j];
-            var cardDiv = createCardDiv(card.value + " " + card.suit);
-            column.appendChild(cardDiv);
-        }
-    }
-}
+        <script>
+            var modal = document.getElementById('helpModal');
+            var s_modal = document.getElementById('settingsModal');
+            var btn = document.getElementById("openHelp");
+            var s_btn = document.getElementById("openSettings");
+            var spans = document.getElementsByClassName("closeButton");
+            var motivate = document.getElementById("motivate");
+            var motivate_img = document.getElementById("motivate_img");
+            var win_modal = document.getElementById('winModal');
+            var win_text = document.getElementById('winText');
 
-var game;
+            motivate.onclick = function() {
+                if(motivate_img.style.display === "block"){
+                    motivate_img.style.display = "none";
+                }
+                else{
+                    motivate_img.style.display = "block";
+                }
+            }
 
-function display(game) {
-console.log(game);
+            // When the user clicks on the button, open the modal
+            btn.onclick = function() {
+                modal.style.display = "block";
+            }
+            s_btn.onclick = function(){
+                s_modal.style.display = "block";
+            }
 
-updateCards(game);
+            // Assign click events for each span elements (x) to close the respective modal
+            for(var i = 0; i < spans.length; i++) {
+                var span = spans[i];
+                
+                // When the user clicks on <span> (x), close the parent modal
+                span.onclick = function() {
+                    // Get the parent modal id that this span belongs to
+                    var spanModalId = this.parentElement.parentElement.id;
 
-}
+                    if(spanModalId === modal.id)
+                        modal.style.display = "none";
+                    
+                    else if(spanModalId === s_modal.id)
+                        s_modal.style.display = "none";
+                }
+            }
 
-// Calls ApplicationController.gameGet()
-$.getJSON("http://localhost:8080/game", function( data ) {
-display(data);
-game = data;
-});
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+                if(event.target == s_modal){
+                    s_modal.style.display = "none";
+                }
+            }
 
+            // Creates and returns an img corresponding to the card text
+            function createCardImg(cardText, zIndex, top) {
+                var img = document.createElement("img");
+                img.classList.add("cardImg");
+                img.src = "/assets/images/cards/" + cardText + ".png";
 
-$("#dealButton").click(function(){
-$.ajax({
-  type: "POST",
-  url: "/dealGame",
-  data: JSON.stringify(game),
-  success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
-        game = data;
-        display(data);},
-  contentType:"application/json; charset=utf-8",
-  dataType:"json",
-});
-});
+                // zIndex is the layer that the card will belong to,
+                // the bigger the zIndex the higher the layer,
+                // highest layer will be displayed over lower layer
+                img.style.zIndex = zIndex;
 
+                // The distance from the top of the container the img should
+                // be placed
+                img.style.top = top + "px";
+                return img
+            }
+            
+            // <div id="Empty1" class="emptyCard hidden"></div>
+            function createEmptyCard(colIndex){
+                var elem = document.createElement("div");
+                elem.classList.add("cardImg");
+                elem.classList.add("emptyCard");
+                // elem.classList.add("hidden");
+                elem.addEventListener("click", function (){
+                    if (fromColumn != -1){
+                        moveCard(fromColumn, colIndex);
+                        fromColumn = -1;
+                    }
+                    console.log("Element Clicked!");
+                });
+                return elem;
+            }
 
-function removeCard(colNumber){
-$.ajax({
-type: "POST",
-url: "/removeCard/"+colNumber,
-data: JSON.stringify(game),
-success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
-game = data;
-display(data);},
-contentType:"application/json; charset=utf-8",
-dataType:"json",
-});
+            // Updates the gui to the cards in the game
+            function updateCards(game) {
+                // Loop over each column of cards
+                for(var i = 0; i < 4; i++) {
+                    // HTML element of the card
+                    var cardElement;
 
-}
+                    // HTML element of the div that holds card elements
+                    var column = $(".cardsInColumnContainer.column" + (i + 1))[0];
+                    
+                    // Reset the column to a blank state
+                    column.innerHTML = "";
 
+                    if (game.cardColumns[i].cards.length === 0) {
+                        cardElement = createEmptyCard(i);
+                        column.appendChild(cardElement);
+                    }
+                    // Loop over each card in the column
+                    for(var j = 0; j < game.cardColumns[i].cards.length; j++) {
+                        // Get the card in the column
+                        var card = game.cardColumns[i].cards[j];
+                        
+                        // Get the card text from the current card
+                        var cardText = card.textRepresentation;
 
-$("#Remove1").click(function(){
-    removeCard(0);
-});
-$("#Remove2").click(function(){
-    removeCard(1);
-});
-$("#Remove3").click(function(){
-    removeCard(2);
-});
-$("#Remove4").click(function(){
-    removeCard(3);
-});
+                        // Generate img element based on card type
+                        cardElement = createCardImg(cardText, j, j * 33);
 
+                        // Add the card element to the column element
+                        column.appendChild(cardElement);
+                    }
 
-$("#moveButton").click(function(){
-var colFrom = $("#from_col").val();
-var colTo = $("#to_col").val();
-$.ajax({
-  type: "POST",
-  url: "/moveCard/"+colFrom+"/"+colTo,
-  data: JSON.stringify(game),
-  success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
-        game = data;
-        display(data);},
-  contentType:"application/json; charset=utf-8",
-  dataType:"json",
-});
-});
+                    // Set the scrollbar to show the latest card if cards exist
+                    if(game.cardColumns[i].cards.length > 0)
+                        column.scrollTop = cardElement.offsetHeight + cardElement.offsetTop;
+ 
+                    // Check if card may be removed. If it can, remove hidden CSS from
+                    // Respective button.
+                    var removeElem = "#Remove" + (i + 1);
+                    if (game.cardColumns[i].canRemoveTopCard){
+                        $(removeElem).removeClass("hidden");
+                    }
+                    else
+                        $(removeElem).addClass("hidden");
 
+                    removeElem = "#Move" + (i + 1);
+                    if (game.cardColumns[i].canMoveAce) {
+                        $(removeElem).removeClass("hidden");
+                    }
+                    else
+                        $(removeElem).addClass("hidden");
+                }
+            }
 
-</script>
+            // The current state of the game
+            var game;
+            var fromColumn = -1;
+
+            // Updates the gui
+            function display(game) {
+                console.log(game);
+                updateCards(game);
+
+                // Update the current score
+                $("#currentScoreValue").html(game.score);
+                if(game.gameEnded){
+                    if(game.score == 48){
+                        win_text.innerHTML += '<h1><center>MY DUDE, YOU WON!</center></h1><hr><br><br>';
+                        win_text.innerHTML += '<center>Your final score is 48 points!</center><br>';
+                        win_text.innerHTML += '<center>Reload the page to play again!</center><br><br>';
+                    }
+                    else{
+                        win_text.innerHTML += '<h1><center>Oh noes, you lost! ;(</center></h1><hr><br><br>';
+                        win_text.innerHTML += '<center>Your final score is ' + game.score + ' point(s)!</center>';
+                        win_text.innerHTML += '<br><center>Reload the page to play again!</center><br><br>';
+                    }
+                    win_modal.style.display = "block";
+                }
+            }
+
+            // Calls ApplicationController.gameGet()
+            $.getJSON("http://localhost:8080/game", function(data) {
+                display(data);
+                game = data;
+            });
+
+            // Deals 4 cards, 1 card per column, on click
+            $("#dealButton").click(function(){
+                $.ajax({
+                    type: "POST",
+                    url: "/dealGame",
+                    data: JSON.stringify(game),
+                    success: function(data, status){
+                        console.log("Data: " + data + "\nStatus: " + status);
+                        game = data;
+                        display(data);
+                    },
+                    contentType:"application/json; charset=utf-8",
+                    dataType:"json",
+                });
+            });
+
+            // Remove the top card from a column
+            function removeCard(colNumber){
+                $.ajax({
+                    type: "POST",
+                    url: "/removeCard/" + colNumber,
+                    data: JSON.stringify(game),
+                    success: function(data, status){
+                        console.log("Data: " + data + "\nStatus: " + status);
+                        game = data;
+                        display(data);
+                    },
+                    contentType:"application/json; charset=utf-8",
+                    dataType:"json",
+                });
+            }
+
+            function highlightEmpty() {
+                $(".emptyCard").each(function (index, elem){
+                    elem.classList.add("moveToColumn");
+                })
+            }
+
+            // Remove a card from the 1st column on click
+            $("#Remove1").click(function(){
+                removeCard(0);
+            });
+
+            // Remove a card from the 2nd column on click
+            $("#Remove2").click(function(){
+                removeCard(1);
+            });
+
+            // Remove a card from the 3rd column on click
+            $("#Remove3").click(function(){
+                removeCard(2);
+            });
+
+            // Remove a card from the 4th column on click
+            $("#Remove4").click(function(){
+                removeCard(3);
+            });
+
+            // Move top card from the 1st column on click
+            $("#Move1").click(function () {
+                fromColumn = 0;
+                highlightEmpty();
+            });
+
+            // Move top card from the 2nd column on click
+            $("#Move2").click(function () {
+                fromColumn = 1;
+                highlightEmpty();
+            });
+
+            // Move top card from the 3rd column on click
+            $("#Move3").click(function () {
+                fromColumn = 2;
+                highlightEmpty();
+            });
+
+            // Move top card from the 4th column on click
+            $("#Move4").click(function () {
+                fromColumn = 3;
+                highlightEmpty();
+            });
+
+            // Move a card from one column to another on click
+            function moveCard(colFrom, colTo){
+                $.ajax({
+                    type: "POST",
+                    url: "/moveCard/" + colFrom + "/" +colTo,
+                    data: JSON.stringify(game),
+                    success: function(data, status){
+                        console.log("Data: " + data + "\nStatus: " + status);
+                        game = data;
+                        display(data);
+                    },
+                    contentType:"application/json; charset=utf-8",
+                    dataType:"json",
+                });
+            }
+        </script>
+    </body>
+</html>

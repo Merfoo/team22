@@ -18,10 +18,13 @@ td{
 
 html {
   /*Image Citation: Clouds Rain background from pptbackgrounds.org*/
-  background-image: url("cloudBackground3.jpg");
-  background-repeat: no-repeat;
+  background-image: url("../images/cloudBackground3.jpg");
+  background-repeat: no-repeat center center fixed;
   background-size: 100%;
 
+  font-family: 'Russo One', sans-serif;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 #gameTitle{
@@ -39,13 +42,12 @@ html {
 
 .bottomBoxContent{
     flex: .5;
-    /*border: 1px solid #000;*/
 }
 
 #bottomBox2{
     display: flex;
-    /*border: 1px solid #000;*/
-    flex: .5;
+    align-content: center;
+    justify-content: center;
 }
 
 .bottomLeft{
@@ -69,67 +71,172 @@ html {
 }
 
 #dealButton{
-      /*position: relative;
-      /*right: 30px;
-      bottom: 30px;*/
-      margin: 0 0 0 100px;
-      height: 120px;
-      width: 120px;
-      border: none;
-      border-radius: 60px;
-      background-color: #109aff;
-      color: #fff;
-      cursor: pointer;
-      box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
+    height: 120px;
+    width: 120px;
+    border: none;
+    border-radius: 60px;
+    background-color: #109aff;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    font-size: 110px;
+    line-height: 120px;
+    outline: none;
 
+    /* To prevent highlighting the + */
+    -webkit-touch-callout: none;    /* iOS Safari */
+    -webkit-user-select: none;      /* Safari */
+    -khtml-user-select: none;       /* Konqueror HTML */
+    -moz-user-select: none;         /* Firefox */
+    -ms-user-select: none;          /* Internet Explorer/Edge */
+    user-select: none;              /* Non-prefixed version, currently
+                                        supported by Chrome and Opera */
 }
 
-#moveButton{
-    /*position: relative;
-    margin: 2px 0 30px 0;
-    float: right;
-    left: -40%;*/
+#dealButton:hover{
+    background-color: #1b5c8e;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+    height: 115px;
+    width: 115px;
+    line-height: 115px;
+    font-size: 100px;
+    border-radius: 65px;
 }
 
 #moveCards{
     margin: 0 0 0 60px;
 }
 
+#motivate_img{
+    display: none;
+}
+
 moveCardInput{
     width: 20px;
 }
+
 .cardsContainer {
     display: flex;
     height: 550px;
 }
 
-.cardColumn {
+.cardsColumn {
     display: flex;
     flex-grow: 1;
     flex-direction: column;
+    min-width: 25%;
 }
 
-.cardsHolder {
+.cardsColumnHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+}
+
+.cardsInColumnContainer {
     padding-left: 10px;
     padding-right: 10px;
-    height: 500px;
+    text-align: center;
+    flex: 1;
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.cardsColumnFooter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
 }
 
 .card {
     text-align: center;
-    padding: 10px;
-    margin-bottom: 5px;
+    padding: 2px;
     font-weight: bold;
 }
 
-.removeCardFromColumnContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Card images from http://acbl.mybigcommerce.com/52-playing-cards/ */
+.cardImg {
+    position: absolute;
+    width: 112.5px;   /* original 225px */
+    height: 175px;    /* original 350px */
 }
 
-.dealButtonPlus{
-    position: relative;
-    bottom: 35px;
-    font-size: 150px;
+.emptyCard {
+    border: 1px solid #888;
+    border-radius: 20px;
+}
+
+.moveToColumn {
+    border: 5px solid #00cc00;
+}
+
+.hidden {
+    display: none;
+}
+
+/*Template used from w3schools.com, thank you!*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modalSettings{
+    background-color: white;
+    color: black;
+    text-shadow: none;
+    font-family: sans-serif;
+    border-radius: 20px;
+    border: 1px solid #888;
+    padding: 20px;
+    width: 40%;
+    margin: 10% auto;
+}
+
+.modalContent {
+    background-color: white;
+    color: black;
+    text-shadow: none;
+
+    font-family: sans-serif;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    border-radius: 30px;
+}
+.closeButton {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeButton:hover,
+.closeButton:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.currentScoreContainer {
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    right: 50px;
+    bottom: 50px;
 }

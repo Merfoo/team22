@@ -4,17 +4,12 @@ import java.util.ArrayList;
 
 public class Game {
 
-    public Deck deck = new Deck();
+    public Deck deck;
     public java.util.List<CardColumn> cardColumns = new ArrayList<>();
     public int score = 0;
     public boolean gameEnded = false;
 
     public Game(){
-        // initialize a new game such that each column can store cards
-        for (int i = 0; i < 4; i++){
-            cardColumns.add(new CardColumn());
-        }
-        deck.shuffle();
     }
 
     public void remove(int columnNumber) {
@@ -28,16 +23,6 @@ public class Game {
         checkEndGame();
     }
 
-    private boolean columnHasCards(int columnNumber) {
-        // check indicated column for number of cards; if no cards return false, otherwise return true
-        return cardColumns.get(columnNumber).hasCards();
-    }
-
-    private Card getTopCard(int columnNumber) {
-        return cardColumns.get(columnNumber).getTop();
-    }
-
-
     public void move(int columnFrom, int columnTo) {
         // remove the top card from the columnFrom column, add it to the columnTo column
         if (columnHasCards(columnFrom)) {
@@ -47,6 +32,23 @@ public class Game {
 
         updateColumnState();
         checkEndGame();
+    }
+
+    protected boolean columnHasCards(int columnNumber) {
+        // check indicated column for number of cards; if no cards return false, otherwise return true
+        return cardColumns.get(columnNumber).hasCards();
+    }
+
+    protected Card getTopCard(int columnNumber) {
+        return cardColumns.get(columnNumber).getTop();
+    }
+
+    protected void addCardToCol(int columnTo, Card cardToMove) {
+        cardColumns.get(columnTo).add(cardToMove);
+    }
+
+    protected void removeCardFromCol(int colFrom) {
+        cardColumns.get(colFrom).removeTop();
     }
 
     public void dealFour() {
@@ -65,15 +67,7 @@ public class Game {
         checkEndGame();
     }
 
-    private void addCardToCol(int columnTo, Card cardToMove) {
-        cardColumns.get(columnTo).add(cardToMove);
-    }
-
-    private void removeCardFromCol(int colFrom) {
-        cardColumns.get(colFrom).removeTop();
-    }
-
-    private boolean canRemoveTopCard(int column){
+    protected boolean canRemoveTopCard(int column){
         boolean canRemove = false;
 
         // If the top card is an Ace then we can't remove it
@@ -95,7 +89,7 @@ public class Game {
 
     // This checks if the game has ended by checking if the deck size is 0
     // and the user can make any moves or removes
-    private void checkEndGame() {
+    protected void checkEndGame() {
         gameEnded = false;
 
         if (deck.size() == 0){
@@ -122,7 +116,7 @@ public class Game {
 
     // Update cardColumn element with canRemove and canMove member variables
     // Called every time game state is updated
-    private void updateColumnState() {
+    protected void updateColumnState() {
         java.util.List<Integer> columnsWithAces = new ArrayList<>();
         boolean emptyColumnExists = false;
 
@@ -150,14 +144,14 @@ public class Game {
         }
     }
       
-    private void calculateScore(){
+    protected void calculateScore(){
         //final score is equal to beginning card count - number of cards remaining in deck - number of cards remaining in each of the four columns
-        int numCardsinCols = 0;
+        int numCardsInCols = 0;
         int beginningCardCount = 52;
         //sums number of remaining cards in each column
         for(int i = 0; i < 4; i++){
-            numCardsinCols = numCardsinCols + cardColumns.get(i).cards.size();
+            numCardsInCols = numCardsInCols + cardColumns.get(i).cards.size();
         }
-        score = beginningCardCount - deck.size()- numCardsinCols;
+        score = beginningCardCount - deck.size()- numCardsInCols;
     }
 }

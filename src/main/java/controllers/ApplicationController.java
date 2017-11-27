@@ -17,6 +17,7 @@
 package controllers;
 
 import models.Game;
+import models.OriginalGame;
 import ninja.Context;
 import ninja.Result;
 import ninja.Results;
@@ -32,7 +33,7 @@ public class ApplicationController {
     }
     
     public Result gameGet(){
-        Game g = new Game();
+        Game g = new OriginalGame();
         g.dealFour();
 
         return Results.json().render(g);

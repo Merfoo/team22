@@ -10,6 +10,10 @@ public class Game {
     public boolean gameEnded = false;
 
     public Game(){
+        // initialize a new game such that each column can store cards
+        for (int i = 0; i < 4; i++){
+            cardColumns.add(new CardColumn());
+        }
     }
 
     public void remove(int columnNumber) {

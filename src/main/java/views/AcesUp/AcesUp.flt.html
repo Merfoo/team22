@@ -97,7 +97,7 @@
         </div>
 
         <div id="helpModal" class="modal">
-            <div class="modalContent">
+            <div id="modalText" class="modalContent">
                 <span class="closeButton">&times;</span>
                 <h3><center>Welcome to Aces Up! Solitaire</center></h3>
                 Bro, get ready to get skkkkkyyyy high in this perky version of Aces Up Solitaire!
@@ -139,6 +139,11 @@
             var motivate_img = document.getElementById("motivate_img");
             var win_modal = document.getElementById('winModal');
             var win_text = document.getElementById('winText');
+
+            var game_title = document.getElementById('gameTitle');
+            var deal_button = document.getElementById('dealButton');
+            var modal_text = document.getElementById('modalText');
+
 
             motivate.onclick = function() {
                 if(motivate_img.style.display === "block"){

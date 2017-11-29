@@ -83,6 +83,14 @@
             </div>
         </div>
 
+        <div id="gameTypeModal" class="modal">
+            <div class="modalContent">
+                <center>Game Type</center><hr><br><br>
+                <center><input type="checkbox" value="" id="oGameType">OG Original Version</input></center>
+                <center><input type="checkbox" value="" id="sGameType">Spicy Spanish Version</input></center>
+            </div>
+        </div>
+
         <div id="settingsModal" class="modal">
             <div class="modalSettings">
                 <span class="closeButton">&times;</span>
@@ -131,6 +139,7 @@
 
         <script>
             var modal = document.getElementById('helpModal');
+            var g_modal = document.getElementById('gameTypeModal');
             var s_modal = document.getElementById('settingsModal');
             var btn = document.getElementById("openHelp");
             var s_btn = document.getElementById("openSettings");
@@ -139,6 +148,16 @@
             var motivate_img = document.getElementById("motivate_img");
             var win_modal = document.getElementById('winModal');
             var win_text = document.getElementById('winText');
+            var oGameType = document.getElementById('oGameType');
+            var sGameType = document.getElementById('sGameType');
+
+            sGameType.onclick = function(){
+                g_modal.style.display = "none";
+            }
+
+            oGameType.onclick = function(){
+                g_modal.style.display = "none";
+            }
 
             motivate.onclick = function() {
                 if(motivate_img.style.display === "block"){
@@ -147,6 +166,11 @@
                 else{
                     motivate_img.style.display = "block";
                 }
+            }
+
+            //when game loads, game style modal will open
+            window.onload = function(event) {
+                    g_modal.style.display = "block";
             }
 
             // When the user clicks on the button, open the modal
@@ -181,6 +205,9 @@
                 }
                 if(event.target == s_modal){
                     s_modal.style.display = "none";
+                }
+                if(event.target == g_modal){
+                    g_modal.style.display = "none";
                 }
             }
 

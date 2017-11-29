@@ -8,7 +8,7 @@
     <body>
         <div>
             <div>
-                <h1 id="gameTitle"> Aces Up! Solitare </h1>
+                <h1 id="gameTitle"> Aces Wayyy Up! Solitare </h1>
             </div>
             <div class="cardsContainer">
                 <div class="cardsColumn">
@@ -83,14 +83,6 @@
             </div>
         </div>
 
-        <div id="gameTypeModal" class="modal">
-            <div class="modalContent">
-                <center>Game Type</center><hr><br><br>
-                <center><input type="checkbox" value="" id="oGameType">OG Original Version</input></center>
-                <center><input type="checkbox" value="" id="sGameType">Spicy Spanish Version</input></center>
-            </div>
-        </div>
-
         <div id="settingsModal" class="modal">
             <div class="modalSettings">
                 <span class="closeButton">&times;</span>
@@ -139,7 +131,6 @@
 
         <script>
             var modal = document.getElementById('helpModal');
-            var g_modal = document.getElementById('gameTypeModal');
             var s_modal = document.getElementById('settingsModal');
             var btn = document.getElementById("openHelp");
             var s_btn = document.getElementById("openSettings");
@@ -148,22 +139,32 @@
             var motivate_img = document.getElementById("motivate_img");
             var win_modal = document.getElementById('winModal');
             var win_text = document.getElementById('winText');
-            var oGameType = document.getElementById('oGameType');
-            var sGameType = document.getElementById('sGameType');
-
-            sGameType.onclick = function(){
-                g_modal.style.display = "none";
-            }
-
-            oGameType.onclick = function(){
-                g_modal.style.display = "none";
-            }
 
             var game_title = document.getElementById('gameTitle');
             var deal_button = document.getElementById('dealButton');
             var modal_text = document.getElementById('modalText');
+            var html_class = document.getElementsByClassName('html')[0];
 
-            
+            function nginex_sucks(){ //@sirNexus
+                //game title change
+                game_title.innerHTML = "La Solitara de Arriba";
+                game_title.style.color = "black";
+                game_title.style.textShadow =  "-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white";
+
+                //background change
+                 //document.body.style.backgroundImage = "url('./images/pepperBackground.jpg')";
+                document.documentElement.style.backgroundImage = "url('../../../assets/images/pepperBackground.jpg')";
+                document.documentElement.style.color = "black";
+                document.documentElement.style.textShadow = "-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white";
+                //help modal text change
+
+                //deal button change
+                deal_button.innerHTML = "<img src='../../../assets/images/pepperButton.jpg' width='120px' height='120px'>";
+
+
+                //motivate image change
+            }
+         
 
 
 
@@ -174,11 +175,6 @@
                 else{
                     motivate_img.style.display = "block";
                 }
-            }
-
-            //when game loads, game style modal will open
-            window.onload = function(event) {
-                    g_modal.style.display = "block";
             }
 
             // When the user clicks on the button, open the modal
@@ -213,9 +209,6 @@
                 }
                 if(event.target == s_modal){
                     s_modal.style.display = "none";
-                }
-                if(event.target == g_modal){
-                    g_modal.style.display = "none";
                 }
             }
 
@@ -334,6 +327,8 @@
 
             // Calls ApplicationController.gameGet()
             $.getJSON("http://localhost:8080/game", function(data) {
+          //   document.body.style.backgroundImage = "url('../images/cloudBackground3.jpg')";
+
                 display(data);
                 game = data;
             });

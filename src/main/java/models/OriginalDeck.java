@@ -11,5 +11,7 @@ public class OriginalDeck extends Deck {
             cards.add(new Card(i, Suit.Diamonds));
             cards.add(new Card(i, Suit.Spades));
         }
+
+        originalSize = 52;
     }
 }

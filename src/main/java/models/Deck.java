@@ -1,14 +1,23 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.Collections;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
-public class Deck{
+@JsonTypeInfo(use = Id.CLASS,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @Type(value = OriginalDeck.class)
+})
+public abstract class Deck{
 
     public java.util.List<Card> cards = new ArrayList<Card>(52);
-
-    public Deck() {}
+    protected int originalSize;
 
     public void shuffle() {
         // shuffles the cards so that it is random
@@ -28,4 +37,6 @@ public class Deck{
     }
 
     public int size() { return cards.size(); }
+
+    public int originalSize() { return originalSize; }
 }

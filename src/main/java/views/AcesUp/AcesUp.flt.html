@@ -83,6 +83,17 @@
             </div>
         </div>
 
+        <div id="gameTypeModal" class="modal">
+            <div id="gModalContent" class="modalContent">
+                <h3><center>Welcome to Aces Up! Solitaire</center></h3>
+                <center>Which version of AcesUp Solitare pleases you? Choose Wisely...</center><br><br>
+                <center>
+                    <span><input type="checkbox" value="" id="oGameType">OG Original Version</input></span>
+                    <span><input type="checkbox" value="" id="sGameType">Spicy Spanish Version</input></span>
+                </center>
+            </div>
+        </div>
+
         <div id="settingsModal" class="modal">
             <div class="modalSettings">
                 <span class="closeButton">&times;</span>
@@ -140,6 +151,7 @@
             var win_modal = document.getElementById('winModal');
             var win_text = document.getElementById('winText');
 
+
             var game_title = document.getElementById('gameTitle');
             var deal_button = document.getElementById('dealButton');
             var modal_text = document.getElementById('modalText');
@@ -185,6 +197,10 @@
                 modal_text.innerHTML  +=   "       then you can bend reality to your will and get it done! Yeah yeah yeah!</li>";
                 modal_text.innerHTML += "  </ul>";
 
+            sGameType.onclick = function(){
+                g_modal.style.display = "none";
+                spanishGameMode();
+            }
 
             }
 

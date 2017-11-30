@@ -195,6 +195,10 @@ moveCardInput{
     background-color: rgba(0,0,0,0.4);
 }
 
+#gameTypeModal{
+    background-color: black;
+}
+
 .modalSettings{
     background-color: white;
     color: black;

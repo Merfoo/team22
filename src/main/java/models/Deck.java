@@ -8,14 +8,7 @@ public class Deck{
 
     public java.util.List<Card> cards = new ArrayList<Card>(52);
 
-    public Deck() {
-//        for(int i = 2; i < 15; i++){
-//            cards.add(new Card(i, Suit.Clubs));
-//            cards.add(new Card(i, Suit.Hearts));
-//            cards.add(new Card(i, Suit.Diamonds));
-//            cards.add(new Card(i, Suit.Spades));
-//        }
-    }
+    public Deck() {}
 
     public void shuffle() {
         // shuffles the cards so that it is random

@@ -6,10 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class CardColumn {
     public final java.util.List<Card> cards = new ArrayList<>();
 
-    public CardColumn() {
-
-    }
-
     public void add(Card card) {
         cards.add(card);
     }

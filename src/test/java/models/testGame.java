@@ -15,9 +15,15 @@ public class testGame {
     }
 
     @Test
-    public void testGameBuildDeck(){
+    public void testBuildDeck(){
         Game g = new Game();
         assertEquals(52,g.deck.cards.size());
+    }
+
+    @Test
+    public void testCardColumnCreation(){
+        Game g = new Game();
+        assertEquals(4, g.cardColumns.size());
     }
 
     @Test
@@ -30,35 +36,68 @@ public class testGame {
         assertFalse(Arrays.equals(g1.deck.cards.toArray(),g2.deck.cards.toArray()));
     }
 
-    @Test
-    public void testGameStart(){
-        Game g = new Game();
-        g.deck.shuffle();
-        g.dealFour();
-        assertEquals(1,g.columns.get(0).cards.size());
-        assertEquals(1,g.columns.get(1).cards.size());
-        assertEquals(1,g.columns.get(2).cards.size());
-        assertEquals(1,g.columns.get(3).cards.size());
-    }
-
-    @Test
-    public void testCustomDeal(){
-        Game g = new Game();
-        g.customDeal(0,3,6,9);
-        assertEquals("2Clubs",g.columns.get(0).cards.get(0).toString());
-        assertEquals("3Clubs",g.columns.get(1).cards.get(0).toString());
-        assertEquals("4Clubs",g.columns.get(2).cards.get(0).toString());
-        assertEquals("5Clubs",g.columns.get(3).cards.get(0).toString());
-    }
-
+    //This test isn't covering more lines...
     @Test
     public void testRemoveFunction(){
         Game g = new Game();
-        g.customDeal(0,3,6,9);
-        g.remove(2);
-        assertEquals(0,g.columns.get(2).cards.size());
+        Card card = new Card(5, Suit.Clubs);
+        g.dealFour();
+        g.remove(0);
+        assertEquals(0, g.cardColumns.get(0).cards.size());
     }
 
+    //    @Test
+//    public void testRemoveFunction(){
+//        Game g = new Game();
+//        g.customDeal(0,3,6,9);
+//        g.remove(2);
+//        assertEquals(0,g.columns.get(2).cards.size());
+//    }
+
+    @Test
+    public void testColumnHasCards(){
+
+    }
+
+    @Test
+    public void testGetTopCard(){
+
+    }
+
+    @Test
+    public void testMove(){
+
+    }
+
+    @Test
+    public void testDealFour(){
+
+    }
+
+    @Test
+    public void testAddCardToCol(){
+
+    }
+
+//
+//    @Test
+//    public void testCustomDeal(){
+//        Game g = new Game();
+//        g.customDeal(0,3,6,9);
+//        assertEquals("2Clubs",g.columns.get(0).cards.get(0).toString());
+//        assertEquals("3Clubs",g.columns.get(1).cards.get(0).toString());
+//        assertEquals("4Clubs",g.columns.get(2).cards.get(0).toString());
+//        assertEquals("5Clubs",g.columns.get(3).cards.get(0).toString());
+//    }
+//
+
+//
+//    @Test
+//    public void testHasCardColumns(){
+//        Game g = new Game();
+//        assertEquals(4,g.cardColumns.size());
+//    }
+//
 
 
 }

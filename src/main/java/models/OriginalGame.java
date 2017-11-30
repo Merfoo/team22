@@ -5,12 +5,11 @@ import java.util.ArrayList;
 public class OriginalGame extends Game {
 
     public OriginalGame(){
-        super();
         deck = new OriginalDeck();
         deck.shuffle();
 
         for(int i = 0; i < 4; i++)
-            cardColumns.add(new CardColumn());
+            cardColumns.add(new OriginalCardColumn());
     }
 
     private boolean canRemoveTopCard(int column){
@@ -23,8 +22,8 @@ public class OriginalGame extends Game {
 
         for (int i = 0; i < 4; i++){
             if (i != column && cardColumns.get(i).hasCards() && cardColumns.get(column).hasCards()){
-                if (cardColumns.get(i).getTop().getSuit() == cardColumns.get(column).getTop().getSuit() &&
-                        cardColumns.get(i).getTop().getValue() > cardColumns.get(column).getTop().getValue()){
+                if (getTopCard(i).getSuit() == getTopCard(column).getSuit() &&
+                        getTopCard(i).getValue() > getTopCard(column).getValue()){
                     canRemove = true;
                 }
             }
@@ -50,7 +49,7 @@ public class OriginalGame extends Game {
                     break;
                 }
 
-                if (cardColumns.get(i).canMoveAce) {
+                if (((OriginalCardColumn) cardColumns.get(i)).canMoveAce) {
                     movesAvailable = true;
                     break;
                 }
@@ -70,7 +69,7 @@ public class OriginalGame extends Game {
 
         for (int i = 0; i < 4; i++) {
             cardColumns.get(i).canRemoveTopCard = canRemoveTopCard(i);
-            cardColumns.get(i).canMoveAce = false;
+            ((OriginalCardColumn) cardColumns.get(i)).canMoveAce = false;
 
             // Check if the top card is an Ace, if so, add the index to columnsWithAces
             if(cardColumns.get(i).hasCards()){
@@ -87,7 +86,7 @@ public class OriginalGame extends Game {
         // card canMoveAce variable to true
         if(emptyColumnExists){
             for(int i = 0; i < columnsWithAces.size(); i++) {
-                cardColumns.get(columnsWithAces.get(i)).canMoveAce = true;
+                ((OriginalCardColumn) cardColumns.get(columnsWithAces.get(i))).canMoveAce = true;
             }
         }
     }

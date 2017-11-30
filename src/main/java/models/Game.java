@@ -11,7 +11,8 @@ import java.util.ArrayList;
                 include = JsonTypeInfo.As.PROPERTY,
                 property = "type")
 @JsonSubTypes({
-        @Type(value = OriginalGame.class)
+        @Type(value = OriginalGame.class),
+        @Type(value = SpanishGame.class)
 })
 public abstract class Game {
 

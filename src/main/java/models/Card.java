@@ -28,18 +28,6 @@ public class Card implements Serializable {
     public String toString() {
         String cardValue = Integer.toString(this.value);
 
-        if(this.value == 11)
-            cardValue = "J";
-
-        else if(this.value == 12)
-            cardValue = "Q";
-
-        else if(this.value == 13)
-            cardValue = "K";
-
-        else if(this.value == 14)
-            cardValue = "A";
-
         return cardValue + " " + this.suit.toString();
     }
 }

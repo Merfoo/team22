@@ -8,8 +8,9 @@ public class SpanishGame extends Game {
         deck = new SpanishDeck();
         deck.shuffle();
 
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < 4; i++){
             cardColumns.add(new SpanishCardColumn());
+        }
     }
 
     private boolean canRemoveTopCard(int column){
@@ -44,7 +45,6 @@ public class SpanishGame extends Game {
                     movesAvailable = true;
                     break;
                 }
-
             }
 
             // If there are moves available, then the game has NOT ended
@@ -56,7 +56,6 @@ public class SpanishGame extends Game {
     // Called every time game state is updated
     @Override
     protected void updateColumns() {
-
         for (int i = 0; i < 4; i++) {
             cardColumns.get(i).canRemoveTopCard = canRemoveTopCard(i);
         }

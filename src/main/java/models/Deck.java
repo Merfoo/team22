@@ -2,6 +2,7 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
@@ -12,7 +13,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
         include = JsonTypeInfo.As.PROPERTY,
         property = "type")
 @JsonSubTypes({
-        @Type(value = OriginalDeck.class)
+        @Type(value = OriginalDeck.class),
+        @Type(value = SpanishDeck.class)
 })
 public abstract class Deck{
 

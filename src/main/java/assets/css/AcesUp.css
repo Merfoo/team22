@@ -177,6 +177,10 @@ moveCardInput{
     border: 5px solid #00cc00;
 }
 
+.removeFromColumn {
+    border: 5px solid #00cc00;
+}
+
 .hidden {
     display: none;
 }

@@ -18,6 +18,7 @@ package controllers;
 
 import models.Game;
 import models.OriginalGame;
+import models.SpanishGame;
 import ninja.Context;
 import ninja.Result;
 import ninja.Results;
@@ -32,8 +33,15 @@ public class ApplicationController {
         return Results.html().template("views/AcesUp/AcesUp.flt.html");
     }
     
-    public Result gameGet(){
-        Game g = new OriginalGame();
+    public Result gameGet(Context context, @PathParam("gameVersion") String gameVersion){
+        Game g = null;
+
+        if(gameVersion.equals("originalGame"))
+            g = new OriginalGame();
+
+        else if(gameVersion.equals("spanishGame"))
+            g = new SpanishGame();
+
         g.dealFour();
 
         return Results.json().render(g);

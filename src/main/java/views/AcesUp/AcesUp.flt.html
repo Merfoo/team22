@@ -200,16 +200,24 @@
                 modal_text.innerHTML += "</ul>";
             }
 
-
             sGameType.onclick = function(){
-                g_modal.style.display = "none";
-                spanishGameMode();
+                // Calls ApplicationController.gameGet()
+                $.getJSON("http://localhost:8080/game/spanishGame", function(data) {
+                    g_modal.style.display = "none";
+                    spanishGameMode();
+                    display(data);
+                    game = data;
+                });
             }
 
             oGameType.onclick = function(){
-                g_modal.style.display = "none";
+                // Calls ApplicationController.gameGet()
+                $.getJSON("http://localhost:8080/game/originalGame", function(data) {
+                    g_modal.style.display = "none";
+                    display(data);
+                    game = data;
+                });
             }
-
 
             motivate.onclick = function() {
                 if(motivate_img.style.display === "block"){
@@ -277,7 +285,6 @@
                 var elem = document.createElement("div");
                 elem.classList.add("cardImg");
                 elem.classList.add("emptyCard");
-                // elem.classList.add("hidden");
                 elem.addEventListener("click", function (){
                     if (fromColumn != -1){
                         moveCard(fromColumn, colIndex);
@@ -367,12 +374,6 @@
                     win_modal.style.display = "block";
                 }
             }
-
-            // Calls ApplicationController.gameGet()
-            $.getJSON("http://localhost:8080/game", function(data) {
-                display(data);
-                game = data;
-            });
 
             // Deals 4 cards, 1 card per column, on click
             $("#dealButton").click(function(){

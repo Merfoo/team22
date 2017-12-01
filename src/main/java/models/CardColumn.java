@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
         @Type(value = OriginalCardColumn.class),
         @Type(value = SpanishCardColumn.class)
 })
+
 public abstract class CardColumn {
     public final java.util.List<Card> cards = new ArrayList<>();
 

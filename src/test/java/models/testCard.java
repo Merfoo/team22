@@ -22,13 +22,13 @@ public class testCard {
         Card c1 = new Card(5, Suit.Clubs);
         assertEquals("5 Clubs", c1.toString());
         Card c2 = new Card(11, Suit.Hearts);
-        assertEquals("J Hearts", c2.toString());
+        assertEquals("11 Hearts", c2.toString());
         Card c3 = new Card(12, Suit.Spades);
-        assertEquals("Q Spades", c3.toString());
+        assertEquals("12 Spades", c3.toString());
         Card c4 = new Card(13, Suit.Diamonds);
-        assertEquals("K Diamonds", c4.toString());
+        assertEquals("13 Diamonds", c4.toString());
         Card c5 = new Card(14, Suit.Diamonds);
-        assertEquals("A Diamonds", c5.toString());
+        assertEquals("14 Diamonds", c5.toString());
     }
 
 

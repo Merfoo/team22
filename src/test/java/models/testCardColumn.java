@@ -10,13 +10,13 @@ public class testCardColumn {
 
     @Test
     public void testCardArray(){
-        CardColumn c = new CardColumn();
+        OriginalCardColumn c = new OriginalCardColumn();
         assertNotNull(c.cards);
     }
 
     @Test
     public void testAddCards(){
-        CardColumn c = new CardColumn();
+        OriginalCardColumn c = new OriginalCardColumn();
         Card card = new Card(5, Suit.Clubs);
         c.add(card);
         assertEquals(1, c.cards.size());
@@ -24,7 +24,7 @@ public class testCardColumn {
 
     @Test
     public void testgetTop(){
-        CardColumn c = new CardColumn();
+        OriginalCardColumn c = new OriginalCardColumn();
         Card card = new Card(5, Suit.Clubs);
         c.add(card);
         assertEquals(card, c.getTop());
@@ -32,7 +32,7 @@ public class testCardColumn {
 
     @Test
     public void testRemoveCards(){
-        CardColumn c = new CardColumn();
+        OriginalCardColumn c = new OriginalCardColumn();
         Card card = new Card(5, Suit.Clubs);
         c.add(card);
         c.removeTop();
@@ -41,7 +41,7 @@ public class testCardColumn {
 
     @Test
     public void testHasCards(){
-        CardColumn c = new CardColumn();
+        OriginalCardColumn c = new OriginalCardColumn();
         assertEquals(false, c.hasCards());
         Card card = new Card(5, Suit.Clubs);
         c.add(card);

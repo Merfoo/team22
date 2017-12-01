@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
-public class testGame {
+public class testOriginalGame {
 
     @Test
     public void testGameCreation(){

@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
-public class testCardColumn {
+public class testOriginalCardColumn {
 
     @Test
     public void testCardArray(){

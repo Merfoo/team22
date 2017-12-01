@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
-public class testDeck {
+public class testOriginalDeck {
 
     @Test
     public void testDeckCreation(){
@@ -18,6 +18,12 @@ public class testDeck {
     public void testHasCards(){
         OriginalDeck d = new OriginalDeck();
         assertEquals(true, d.hasCards());
+    }
+
+    @Test
+    public void testDeckSize(){
+        OriginalDeck d = new OriginalDeck();
+        assertEquals(52, d.cards.size());
     }
 
 }

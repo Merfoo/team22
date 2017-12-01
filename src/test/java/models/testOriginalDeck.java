@@ -1,5 +1,4 @@
 package models;
-
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -24,6 +23,6 @@ public class testOriginalDeck {
     public void testDeckSize(){
         OriginalDeck d = new OriginalDeck();
         assertEquals(52, d.cards.size());
+        assertNotEquals(50, d.cards.size());
     }
-
 }

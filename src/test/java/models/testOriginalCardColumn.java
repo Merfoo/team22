@@ -1,5 +1,4 @@
 package models;
-
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -47,6 +46,4 @@ public class testOriginalCardColumn {
         c.add(card);
         assertEquals(true, c.hasCards());
     }
-
-
 }

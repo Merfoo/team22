@@ -18,9 +18,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 public abstract class CardColumn {
     public final java.util.List<Card> cards = new ArrayList<>();
-
     public boolean canRemoveTopCard = false;
-
 
     public void add(Card card) {
         cards.add(card);

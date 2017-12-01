@@ -1,10 +1,10 @@
 package models;
-
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class testCard {
+
     @Test
     public void testGetSuit(){
         Card c = new Card(5, Suit.Clubs);
@@ -30,9 +30,4 @@ public class testCard {
         Card c5 = new Card(14, Suit.Diamonds);
         assertEquals("14 Diamonds", c5.toString());
     }
-
-
-
-
-
 }

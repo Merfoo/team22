@@ -1,5 +1,4 @@
 package models;
-
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -13,5 +12,4 @@ public class testSpanishCardColumn {
         SpanishCardColumn c = new SpanishCardColumn();
         assertNotNull(c.cards);
     }
-
 }

@@ -1,5 +1,4 @@
 package models;
-
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -61,5 +60,4 @@ public class testSpanishGame {
         g.remove(0);
         assertEquals(1, g.score);
     }
-
 }

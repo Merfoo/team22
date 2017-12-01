@@ -1,5 +1,4 @@
 package models;
-
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -13,5 +12,4 @@ public class testSpanishDeck {
         SpanishDeck d = new SpanishDeck();
         assertEquals(50, d.cards.size());
     }
-
 }

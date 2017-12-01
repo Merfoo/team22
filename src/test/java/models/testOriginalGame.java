@@ -1,5 +1,4 @@
 package models;
-
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -69,6 +68,4 @@ public class testOriginalGame {
         assertEquals(false, g.gameEnded);
 
     }
-
-
 }

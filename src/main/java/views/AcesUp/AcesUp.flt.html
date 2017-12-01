@@ -8,7 +8,7 @@
     <body>
         <div>
             <div>
-                <h1 id="gameTitle"> Aces Up! Solitare </h1>
+                <h1 id="gameTitle"> Aces Wayyy Up! Solitare </h1>
             </div>
             <div class="cardsContainer">
                 <div class="cardsColumn">
@@ -19,7 +19,8 @@
 
                     </div>
                     <div class="cardsColumnFooter">
-                        <button id="Remove1" class="removeCardFromColumn">Column1</button>
+                        <button id="Move1" class="moveCardFromColumn">Move</button>
+                        <button id="Remove1" class="removeCardFromColumn">Remove</button>
                     </div>
                 </div>
                 <div class="cardsColumn">
@@ -30,7 +31,8 @@
 
                     </div>
                     <div class="cardsColumnFooter">
-                        <button id="Remove2" class="removeCardFromColumn">Column2</button>
+                        <button id="Move2" class="moveCardFromColumn">Move</button>
+                        <button id="Remove2" class="removeCardFromColumn">Remove</button>
                     </div>
                 </div>
                 <div class="cardsColumn">
@@ -41,7 +43,8 @@
 
                     </div>
                     <div class="cardsColumnFooter">
-                        <button id="Remove3" class="removeCardFromColumn">Column3</button>
+                        <button id="Move3" class="moveCardFromColumn">Move</button>
+                        <button id="Remove3" class="removeCardFromColumn">Remove</button>
                     </div>
                 </div>
                 <div class="cardsColumn">
@@ -52,7 +55,8 @@
 
                     </div>
                     <div class="cardsColumnFooter">
-                        <button id="Remove4" class="removeCardFromColumn">Column4</button>
+                        <button id="Move4" class="moveCardFromColumn">Move</button>
+                        <button id="Remove4" class="removeCardFromColumn">Remove</button>
                     </div>
                 </div>
             </div>
@@ -63,17 +67,30 @@
                     <button id="openHelp" class="openButtons"><img src="/assets/images/help.png" height="60" width="60"></button>
                 </div>
                 <div id="bottomBox2" class="bottomBoxContent">
-                    <button id="dealButton" class=""><div class="dealButtonPlus ">+</div></button>
-                    <div id="moveCards">
-                        <button id="moveButton" class="floatCenter">Move</button>
-                        <div>
-                            <input type="text" id="from_col" size="1" class="moveCardInput"/><div class="floatCenter">to</div><input type="text" id="to_col" size="1" class="moveCardInput"/>
+                    <div id="dealButton">+</div>
+                </div>
+                <div id="bottomBox3" class="bottomBoxContent">
+                    <div id="motivate_img"><img src="/assets/images/motivate.jpg" height="140" width="170"></div>
+                    <div class="currentScoreContainer">
+                        <div class="currentScoreTitle">
+                            Current Score:
+                        </div>
+                        <div id="currentScoreValue">
+
                         </div>
                     </div>
                 </div>
-                <div id="bottomBox3" class="bottomBoxContent">
-                    <!--Placeholder-->
-                </div>
+            </div>
+        </div>
+
+        <div id="gameTypeModal" class="ga_modal">
+            <div id="gModalContent" class="modalContent">
+                <h3><center>Welcome to Aces Up! Solitaire</center></h3>
+                <center>Which version of AcesUp Solitare pleases you? Choose Wisely...</center><br><br>
+                <center>
+                    <span><input type="checkbox" value="" id="oGameType">OG Original Version</input></span>
+                    <span><input type="checkbox" value="" id="sGameType">Spicy Spanish Version</input></span>
+                </center>
             </div>
         </div>
 
@@ -81,11 +98,17 @@
             <div class="modalSettings">
                 <span class="closeButton">&times;</span>
                 <center>Settings</center><hr><br><br>
+                <center><input type="checkbox" value="" id="motivate">Add Motivation</input></center>
+            </div>
+        </div>
+
+        <div id="winModal" class="modal">
+            <div id="winText" class="modalContent">
             </div>
         </div>
 
         <div id="helpModal" class="modal">
-            <div class="modalContent">
+            <div id="modalText" class="modalContent">
                 <span class="closeButton">&times;</span>
                 <h3><center>Welcome to Aces Up! Solitaire</center></h3>
                 Bro, get ready to get skkkkkyyyy high in this perky version of Aces Up Solitaire!
@@ -98,13 +121,18 @@
                     <li>Four cards are dealt to each of the four columns! WOOOH!</li>
                     <li>Click on one of the mega rad cards to remove it!</li>
                     <li>A card can be removed if another one of its brothers or sisters of the same suit is
-                        somewhere on a column just chillin! </li>
+                        somewhere on a column just chillin! If you are capable of removing a card, a remove
+                        button will appear under the column! Click that bad boy and BAM! It dissapears into
+                        the night.</li>
                     <li>A 2 is the lowest value while the Ace is the h-h-h-highest! That means that if you
                         wanna try and remove an Ace, it's impossible. So like, don't try it.</li>
-                    <li>When one of the 4 marvelous stacks are empty, any card can be mega moved into
-                        that wonderful little spot.</li>
+                    <li>When one of the 4 marvelous stacks are empty, you have the mega ability to mega move
+                        an ace (and only an ace) to that specific spot, Charles! If you can move it, a move
+                        button will show up under the column! Click that bad boy and then the empty column
+                        that you want to move it to!</li>
                     <li>In order to play a perfect game, you gotta remove all the cards except for the
-                        Aces!</li>
+                        Aces! For every card you remove, you get 1 point added to your score. Get 48 points
+                        to win! LET'S DO IT!</li>
                     <li>YOU CAN DO IT, MAN! I believe in you. Your reality is conceived based on your pre-cognitive
                         thoughts so if you believe that you are capable of accomplishing the task set before you,
                         then you can bend reality to your will and get it done! Yeah yeah yeah!</li>
@@ -114,10 +142,91 @@
 
         <script>
             var modal = document.getElementById('helpModal');
+            var g_modal = document.getElementById('gameTypeModal');
             var s_modal = document.getElementById('settingsModal');
             var btn = document.getElementById("openHelp");
             var s_btn = document.getElementById("openSettings");
-            var span = document.getElementsByClassName("closeButton")[0];
+            var spans = document.getElementsByClassName("closeButton");
+            var motivate = document.getElementById("motivate");
+            var motivate_img = document.getElementById("motivate_img");
+            var win_modal = document.getElementById('winModal');
+            var win_text = document.getElementById('winText');
+            var oGameType = document.getElementById('oGameType');
+            var sGameType = document.getElementById('sGameType');
+
+            var game_title = document.getElementById('gameTitle');
+            var deal_button = document.getElementById('dealButton');
+            var modal_text = document.getElementById('modalText');
+            var html_class = document.getElementsByClassName('html')[0];
+
+
+            function spanishGameMode(){
+                //game title change
+                game_title.innerHTML = "La Solitara de Arriba";
+                game_title.style.color = "black";
+                game_title.style.textShadow =  "-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white";
+
+                //background change
+                document.documentElement.style.backgroundImage = "url('../../../assets/images/pepperBackground.jpg')";
+                document.documentElement.style.color = "black";
+                document.documentElement.style.textShadow = "-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white";
+                //help modal text change
+
+                //deal button change
+                deal_button.innerHTML = "<img src='../../../assets/images/pepperButton.jpg' width='120px' height='120px'>";
+
+                //settings modal
+                modal_text.innerHTML = "<span class='closeButton'>&times;</span>";
+                modal_text.innerHTML += "<h3><center>Welcome to La Solitara de Arriba!</center></h3>";
+                modal_text.innerHTML += "Bro, get ready to get spicy spicy in this hot new version of Aces Up Solitaire!";
+                modal_text.innerHTML += "<br><br>";
+                modal_text.innerHTML += "<i>Why am I here?</i><br><br>";
+                modal_text.innerHTML += "<b>Good sir/madam, you are here to fulfill your life purpose and remove all the cards";
+                modal_text.innerHTML += "from a deck of cards!</b><br><br>";
+                modal_text.innerHTML += "<ul>";
+                modal_text.innerHTML += "<li>Strap on your chef's hat and get ready to rock!</li>";
+                modal_text.innerHTML += "<li>Four cards are dealt to each of the four columns! WOOOH!</li>";
+                modal_text.innerHTML += "<li>Click on one of the mega rad cards to remove it!</li>";
+                modal_text.innerHTML += "<li>In Spanish version, there are different suits and 50 cards: 9 number cards per suit,";
+                modal_text.innerHTML += "three face cards per suit (10-12), and 2 Joker cards!</li>";
+                modal_text.innerHTML += "<li>Jokers are wild cards that can match with any suit and act as the highest value possible";
+                modal_text.innerHTML += "for that suit, which means that you can remove any card from the top of the pile! However,";
+                modal_text.innerHTML += "once the Joker card has been matched with another card, both Jokers are removed from the game.</li>";
+                modal_text.innerHTML += "<li>Because there are only 50 cards, the last dealt set of cards will only contain 2 cards, unlike";
+                modal_text.innerHTML += "4 in the standard version.</li>";
+                modal_text.innerHTML += "<li>YOU CAN DO IT, MAN! I believe in you. Your reality is conceived based on your pre-cognitive";
+                modal_text.innerHTML += "thoughts so if you believe that you are capable of accomplishing the task set before you,";
+                modal_text.innerHTML += "then you can bend reality to your will and get it done! Yeah yeah yeah!</li>";
+                modal_text.innerHTML += "</ul>";
+            }
+
+            sGameType.onclick = function(){
+                // Calls ApplicationController.gameGet()
+                $.getJSON("http://localhost:8080/game/spanishGame", function(data) {
+                    g_modal.style.display = "none";
+                    spanishGameMode();
+                    display(data);
+                    game = data;
+                });
+            }
+
+            oGameType.onclick = function(){
+                // Calls ApplicationController.gameGet()
+                $.getJSON("http://localhost:8080/game/originalGame", function(data) {
+                    g_modal.style.display = "none";
+                    display(data);
+                    game = data;
+                });
+            }
+
+            motivate.onclick = function() {
+                if(motivate_img.style.display === "block"){
+                    motivate_img.style.display = "none";
+                }
+                else{
+                    motivate_img.style.display = "block";
+                }
+            }
 
             // When the user clicks on the button, open the modal
             btn.onclick = function() {
@@ -127,9 +236,21 @@
                 s_modal.style.display = "block";
             }
 
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function() {
-                modal.style.display = "none";
+            // Assign click events for each span elements (x) to close the respective modal
+            for(var i = 0; i < spans.length; i++) {
+                var span = spans[i];
+                
+                // When the user clicks on <span> (x), close the parent modal
+                span.onclick = function() {
+                    // Get the parent modal id that this span belongs to
+                    var spanModalId = this.parentElement.parentElement.id;
+
+                    if(spanModalId === modal.id)
+                        modal.style.display = "none";
+                    
+                    else if(spanModalId === s_modal.id)
+                        s_modal.style.display = "none";
+                }
             }
 
             // When the user clicks anywhere outside of the modal, close it
@@ -142,20 +263,36 @@
                 }
             }
 
-            // Creates and returns a div with the card text inside of it
-            function createCardText(cardText) {
-                var div = document.createElement("div");
-                div.classList.add("card");
-                div.innerHTML = cardText;
-                return div;
-            }
-
             // Creates and returns an img corresponding to the card text
-            function createCardImg(cardText) {
+            function createCardImg(cardText, zIndex, top) {
                 var img = document.createElement("img");
                 img.classList.add("cardImg");
                 img.src = "/assets/images/cards/" + cardText + ".png";
+
+                // zIndex is the layer that the card will belong to,
+                // the bigger the zIndex the higher the layer,
+                // highest layer will be displayed over lower layer
+                img.style.zIndex = zIndex;
+
+                // The distance from the top of the container the img should
+                // be placed
+                img.style.top = top + "px";
                 return img
+            }
+            
+            // <div id="Empty1" class="emptyCard hidden"></div>
+            function createEmptyCard(colIndex){
+                var elem = document.createElement("div");
+                elem.classList.add("cardImg");
+                elem.classList.add("emptyCard");
+                elem.addEventListener("click", function (){
+                    if (fromColumn != -1){
+                        moveCard(fromColumn, colIndex);
+                        fromColumn = -1;
+                    }
+                    console.log("Element Clicked!");
+                });
+                return elem;
             }
 
             // Updates the gui to the cards in the game
@@ -171,6 +308,10 @@
                     // Reset the column to a blank state
                     column.innerHTML = "";
 
+                    if (game.cardColumns[i].cards.length === 0) {
+                        cardElement = createEmptyCard(i);
+                        column.appendChild(cardElement);
+                    }
                     // Loop over each card in the column
                     for(var j = 0; j < game.cardColumns[i].cards.length; j++) {
                         // Get the card in the column
@@ -179,13 +320,8 @@
                         // Get the card text from the current card
                         var cardText = card.textRepresentation;
 
-                        // Create div with card text if its not the last card
-                        if(j < game.cardColumns[i].cards.length - 1)
-                            cardElement = createCardText(cardText);
-
-                        // Create img corresponding to the card text if its the last card
-                        else
-                            cardElement = createCardImg(cardText);
+                        // Generate img element based on card type
+                        cardElement = createCardImg(cardText, j, j * 33);
 
                         // Add the card element to the column element
                         column.appendChild(cardElement);
@@ -194,23 +330,50 @@
                     // Set the scrollbar to show the latest card if cards exist
                     if(game.cardColumns[i].cards.length > 0)
                         column.scrollTop = cardElement.offsetHeight + cardElement.offsetTop;
+ 
+                    // Check if card may be removed. If it can, remove hidden CSS from
+                    // Respective button.
+                    var removeElem = "#Remove" + (i + 1);
+                    if (game.cardColumns[i].canRemoveTopCard){
+                        $(removeElem).removeClass("hidden");
+                    }
+                    else
+                        $(removeElem).addClass("hidden");
+
+                    removeElem = "#Move" + (i + 1);
+                    if (game.cardColumns[i].canMoveAce) {
+                        $(removeElem).removeClass("hidden");
+                    }
+                    else
+                        $(removeElem).addClass("hidden");
                 }
             }
 
             // The current state of the game
             var game;
+            var fromColumn = -1;
 
             // Updates the gui
             function display(game) {
                 console.log(game);
                 updateCards(game);
-            }
 
-            // Calls ApplicationController.gameGet()
-            $.getJSON("http://localhost:8080/game", function(data) {
-                display(data);
-                game = data;
-            });
+                // Update the current score
+                $("#currentScoreValue").html(game.score);
+                if(game.gameEnded){
+                    if(game.score == 48){
+                        win_text.innerHTML += '<h1><center>MY DUDE, YOU WON!</center></h1><hr><br><br>';
+                        win_text.innerHTML += '<center>Your final score is' + game.score + 'points!</center><br>';
+                        win_text.innerHTML += '<center>Reload the page to play again!</center><br><br>';
+                    }
+                    else{
+                        win_text.innerHTML += '<h1><center>Oh noes, you lost! ;(</center></h1><hr><br><br>';
+                        win_text.innerHTML += '<center>Your final score is ' + game.score + ' point(s)!</center>';
+                        win_text.innerHTML += '<br><center>Reload the page to play again!</center><br><br>';
+                    }
+                    win_modal.style.display = "block";
+                }
+            }
 
             // Deals 4 cards, 1 card per column, on click
             $("#dealButton").click(function(){
@@ -244,6 +407,12 @@
                 });
             }
 
+            function highlightEmpty() {
+                $(".emptyCard").each(function (index, elem){
+                    elem.classList.add("moveToColumn");
+                })
+            }
+
             // Remove a card from the 1st column on click
             $("#Remove1").click(function(){
                 removeCard(0);
@@ -264,11 +433,32 @@
                 removeCard(3);
             });
 
-            // Move a card from one column to another on click
-            $("#moveButton").click(function(){
-                var colFrom = $("#from_col").val();
-                var colTo = $("#to_col").val();
+            // Move top card from the 1st column on click
+            $("#Move1").click(function () {
+                fromColumn = 0;
+                highlightEmpty();
+            });
 
+            // Move top card from the 2nd column on click
+            $("#Move2").click(function () {
+                fromColumn = 1;
+                highlightEmpty();
+            });
+
+            // Move top card from the 3rd column on click
+            $("#Move3").click(function () {
+                fromColumn = 2;
+                highlightEmpty();
+            });
+
+            // Move top card from the 4th column on click
+            $("#Move4").click(function () {
+                fromColumn = 3;
+                highlightEmpty();
+            });
+
+            // Move a card from one column to another on click
+            function moveCard(colFrom, colTo){
                 $.ajax({
                     type: "POST",
                     url: "/moveCard/" + colFrom + "/" +colTo,
@@ -281,7 +471,7 @@
                     contentType:"application/json; charset=utf-8",
                     dataType:"json",
                 });
-            });
+            }
         </script>
     </body>
 </html>

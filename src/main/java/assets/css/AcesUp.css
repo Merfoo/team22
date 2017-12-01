@@ -19,7 +19,7 @@ td{
 html {
   /*Image Citation: Clouds Rain background from pptbackgrounds.org*/
   background-image: url("../images/cloudBackground3.jpg");
-  background-repeat: no-repeat;
+  background-repeat: no-repeat center center fixed;
   background-size: 100%;
 
   font-family: 'Russo One', sans-serif;
@@ -29,7 +29,7 @@ html {
 
 #gameTitle{
   font-weight: bold;
-  font-size: 75px;
+  font-size: 40px;
   font-family: 'Russo One', sans-serif;
   text-align: center;
   color: white;
@@ -42,13 +42,12 @@ html {
 
 .bottomBoxContent{
     flex: .5;
-    /*border: 1px solid #000;*/
 }
 
 #bottomBox2{
     display: flex;
-    /*border: 1px solid #000;*/
-    flex: .5;
+    align-content: center;
+    justify-content: center;
 }
 
 .bottomLeft{
@@ -72,47 +71,47 @@ html {
 }
 
 #dealButton{
-      /*position: relative;
-      /*right: 30px;
-      bottom: 30px;*/
-      margin: 0 0 0 100px;
-      height: 120px;
-      width: 120px;
-      border: none;
-      border-radius: 60px;
-      background-color: #109aff;
-      color: #fff;
-      cursor: pointer;
-      box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
+    height: 120px;
+    width: 120px;
+    border: none;
+    border-radius: 60px;
+    background-color: #109aff;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    font-size: 110px;
+    line-height: 120px;
+    outline: none;
+
+    /* To prevent highlighting the + */
+    -webkit-touch-callout: none;    /* iOS Safari */
+    -webkit-user-select: none;      /* Safari */
+    -khtml-user-select: none;       /* Konqueror HTML */
+    -moz-user-select: none;         /* Firefox */
+    -ms-user-select: none;          /* Internet Explorer/Edge */
+    user-select: none;              /* Non-prefixed version, currently
+                                        supported by Chrome and Opera */
 }
+
 #dealButton:hover{
     background-color: #1b5c8e;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
-    /*box-shadow: offsetright offsetdown offsetsplatter color*/
     height: 115px;
     width: 115px;
+    line-height: 115px;
+    font-size: 100px;
     border-radius: 65px;
-}
-
-.dealButtonPlus{
-    position: relative;
-    bottom: 30px;
-    font-size: 130px;
-}
-
-.dealButtonPlus:hover{
-    font-size: 155px;
-}
-
-#moveButton{
-    /*position: relative;
-    margin: 2px 0 30px 0;
-    float: right;
-    left: -40%;*/
 }
 
 #moveCards{
     margin: 0 0 0 60px;
+}
+
+#motivate_img{
+    display: none;
 }
 
 moveCardInput{
@@ -144,6 +143,9 @@ moveCardInput{
     text-align: center;
     flex: 1;
     overflow-y: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 .cardsColumnFooter {
@@ -161,18 +163,29 @@ moveCardInput{
 
 /* Card images from http://acbl.mybigcommerce.com/52-playing-cards/ */
 .cardImg {
-    width: 225px;
-    height: 350px;
-    margin: 0 auto;
+    position: absolute;
+    width: 112.5px;   /* original 225px */
+    height: 175px;    /* original 350px */
 }
 
+.emptyCard {
+    border: 1px solid #888;
+    border-radius: 20px;
+}
 
+.moveToColumn {
+    border: 5px solid #00cc00;
+}
+
+.hidden {
+    display: none;
+}
 
 /*Template used from w3schools.com, thank you!*/
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 100;
     left: 0;
     top: 0;
     width: 100%;
@@ -180,6 +193,23 @@ moveCardInput{
     overflow: auto;
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
+}
+.ga_modal {
+    display: block;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+#gameTypeModal{
+    display: block;
+    background-color: black;
 }
 
 .modalSettings{
@@ -218,4 +248,12 @@ moveCardInput{
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.currentScoreContainer {
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    right: 50px;
+    bottom: 50px;
 }

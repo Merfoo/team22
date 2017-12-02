@@ -8,7 +8,7 @@
     <body>
         <div>
             <div>
-                <h1 id="gameTitle"> Aces Up! Solitare </h1>
+                <h1 id="gameTitle"> Aces Wayyy Up! Solitare </h1>
             </div>
             <div class="cardsContainer">
                 <div class="cardsColumn">
@@ -56,7 +56,7 @@
                     </div>
                     <div class="cardsColumnFooter">
                         <button id="Move4" class="moveCardFromColumn">Move</button>
-                        <button id="Remove4" class="removeCardFromColumn">Remove</button>
+                        <button id="Remove4" data-colNum=3 class="removeCardFromColumn">Remove</button>
                     </div>
                 </div>
             </div>
@@ -83,6 +83,17 @@
             </div>
         </div>
 
+        <div id="gameTypeModal" class="ga_modal">
+            <div id="gModalContent" class="modalContent">
+                <h3><center>Welcome to Aces Up! Solitaire</center></h3>
+                <center>Which version of AcesUp Solitare pleases you? Choose Wisely...</center><br><br>
+                <center>
+                    <span><input type="checkbox" value="" id="oGameType">OG Original Version</input></span>
+                    <span><input type="checkbox" value="" id="sGameType">Spicy Spanish Version</input></span>
+                </center>
+            </div>
+        </div>
+
         <div id="settingsModal" class="modal">
             <div class="modalSettings">
                 <span class="closeButton">&times;</span>
@@ -97,7 +108,7 @@
         </div>
 
         <div id="helpModal" class="modal">
-            <div class="modalContent">
+            <div id="modalText" class="modalContent">
                 <span class="closeButton">&times;</span>
                 <h3><center>Welcome to Aces Up! Solitaire</center></h3>
                 Bro, get ready to get skkkkkyyyy high in this perky version of Aces Up Solitaire!
@@ -131,6 +142,7 @@
 
         <script>
             var modal = document.getElementById('helpModal');
+            var g_modal = document.getElementById('gameTypeModal');
             var s_modal = document.getElementById('settingsModal');
             var btn = document.getElementById("openHelp");
             var s_btn = document.getElementById("openSettings");
@@ -139,6 +151,90 @@
             var motivate_img = document.getElementById("motivate_img");
             var win_modal = document.getElementById('winModal');
             var win_text = document.getElementById('winText');
+            var oGameType = document.getElementById('oGameType');
+            var sGameType = document.getElementById('sGameType');
+
+            var game_title = document.getElementById('gameTitle');
+            var deal_button = document.getElementById('dealButton');
+            var modal_text = document.getElementById('modalText');
+            var html_class = document.getElementsByClassName('html')[0];
+            var game_type;
+
+
+            function spanishGameMode(){
+                //game title change
+                game_title.innerHTML = "La Solitara de Arriba";
+                game_title.style.color = "black";
+                game_title.style.textShadow =  "-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white";
+
+                //background change
+                document.documentElement.style.backgroundImage = "url('../../../assets/images/pepperBackground.jpg')";
+                document.documentElement.style.color = "black";
+                document.documentElement.style.textShadow = "-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white";
+                //help modal text change
+
+                //deal button change
+                deal_button.innerHTML = "<img src='../../../assets/images/pepperButton.jpg' width='120px' height='120px'>";
+
+                //motivate image change
+                motivate_img.innerHTML = "<img src='../../../assets/images/lauren_face.png' width='220px' height='180px'>";
+
+                //settings modal
+                modal_text.innerHTML = "<span class='closeButton'>&times;</span>";
+                modal_text.innerHTML += "<h3><center>Welcome to La Solitara de Arriba!</center></h3>";
+                modal_text.innerHTML += "Bro, get ready to get spicy spicy in this hot new version of Aces Up Solitaire!";
+                modal_text.innerHTML += "<br><br>";
+                modal_text.innerHTML += "<i>Why am I here?</i><br><br>";
+                modal_text.innerHTML += "<b>Good sir/madam, you are here to fulfill your life purpose and remove all the cards";
+                modal_text.innerHTML += "from a deck of cards!</b><br><br>";
+                modal_text.innerHTML += "<ul>";
+                modal_text.innerHTML += "<li>Strap on your chef's hat and get ready to rock!</li>";
+                modal_text.innerHTML += "<li>Four cards are dealt to each of the four columns! WOOOH!</li>";
+                modal_text.innerHTML += "<li>Click on one of the mega rad cards to remove it!</li>";
+                modal_text.innerHTML += "<li>In Spanish version, there are different suits and 50 cards: 9 number cards per suit,";
+                modal_text.innerHTML += "three face cards per suit (10-12), and 2 Joker cards!</li>";
+                modal_text.innerHTML += "<li>Jokers are wild cards that can match with any suit and act as the highest value possible";
+                modal_text.innerHTML += "for that suit, which means that you can remove any card from the top of the pile! However,";
+                modal_text.innerHTML += "once the Joker card has been matched with another card, both Jokers are removed from the game.</li>";
+                modal_text.innerHTML += "<li>Because there are only 50 cards, the last dealt set of cards will only contain 2 cards, unlike";
+                modal_text.innerHTML += "4 in the standard version.</li>";
+                modal_text.innerHTML += "<li>YOU CAN DO IT, MAN! I believe in you. Your reality is conceived based on your pre-cognitive";
+                modal_text.innerHTML += "thoughts so if you believe that you are capable of accomplishing the task set before you,";
+                modal_text.innerHTML += "then you can bend reality to your will and get it done! Yeah yeah yeah!</li>";
+                modal_text.innerHTML += "</ul>";
+            }
+
+            sGameType.onclick = function(){
+                // Calls ApplicationController.gameGet()
+                $.getJSON("http://localhost:8080/game/spanishGame", function(data) {
+                    g_modal.style.display = "none";
+                    spanishGameMode();
+                    display(data);
+                    game = data;
+                });
+                game_type = "Spanish";
+                colorButton();
+            }
+
+            oGameType.onclick = function(){
+                // Calls ApplicationController.gameGet()
+                $.getJSON("http://localhost:8080/game/originalGame", function(data) {
+                    g_modal.style.display = "none";
+                    display(data);
+                    game = data;
+                });
+                game_type = "Original";
+                colorButton();
+            }
+
+            function colorButton(){
+                if (game_type == "Spanish"){
+                    deal_button.classList.add("spanish");
+                }
+                else {
+                    deal_button.classList.add("original");
+                }
+            }
 
             motivate.onclick = function() {
                 if(motivate_img.style.display === "block"){
@@ -206,13 +302,11 @@
                 var elem = document.createElement("div");
                 elem.classList.add("cardImg");
                 elem.classList.add("emptyCard");
-                // elem.classList.add("hidden");
                 elem.addEventListener("click", function (){
                     if (fromColumn != -1){
                         moveCard(fromColumn, colIndex);
                         fromColumn = -1;
                     }
-                    console.log("Element Clicked!");
                 });
                 return elem;
             }
@@ -274,6 +368,8 @@
             // The current state of the game
             var game;
             var fromColumn = -1;
+            var wildColumn = -1;
+            var removeExtra = -1;
 
             // Updates the gui
             function display(game) {
@@ -285,7 +381,7 @@
                 if(game.gameEnded){
                     if(game.score == 48){
                         win_text.innerHTML += '<h1><center>MY DUDE, YOU WON!</center></h1><hr><br><br>';
-                        win_text.innerHTML += '<center>Your final score is 48 points!</center><br>';
+                        win_text.innerHTML += '<center>Your final score is' + game.score + 'points!</center><br>';
                         win_text.innerHTML += '<center>Reload the page to play again!</center><br><br>';
                     }
                     else{
@@ -296,12 +392,6 @@
                     win_modal.style.display = "block";
                 }
             }
-
-            // Calls ApplicationController.gameGet()
-            $.getJSON("http://localhost:8080/game", function(data) {
-                display(data);
-                game = data;
-            });
 
             // Deals 4 cards, 1 card per column, on click
             $("#dealButton").click(function(){
@@ -329,6 +419,10 @@
                         console.log("Data: " + data + "\nStatus: " + status);
                         game = data;
                         display(data);
+                        if (removeExtra != -1){
+                            removeCard(removeExtra);
+                            removeExtra = -1;
+                        }
                     },
                     contentType:"application/json; charset=utf-8",
                     dataType:"json",
@@ -341,25 +435,75 @@
                 })
             }
 
-            // Remove a card from the 1st column on click
-            $("#Remove1").click(function(){
-                removeCard(0);
-            });
+            function highlightRemove(colNumber, sourceCol){
+                card = $(".column" + (colNumber + 1) + " img:last")[0]
+                card.classList.add("removeFromColumn");
+                card.addEventListener("click", function(){
+                    if (colNumber != wildColumn){
+                        removeCard(sourceCol);
+                    }
+                    else {
+                        removeExtra = wildColumn;
+                        removeCard(sourceCol);
+                    }
+                    wildColumn = -1;
+                })
+            }
 
-            // Remove a card from the 2nd column on click
-            $("#Remove2").click(function(){
-                removeCard(1);
-            });
+            function removeOptions(colNumber) {
+                var numMatched = 0;
+                var card;
 
-            // Remove a card from the 3rd column on click
-            $("#Remove3").click(function(){
-                removeCard(2);
-            });
+                card = getTopCard(colNumber);
+                
+                for (var i=0; i < 4; i++){
+                    var tempCard = getTopCard(i);
+                    if (tempCard == undefined){
+                        continue;
+                    }
+                    if (tempCard.suit === "Comodines"){
+                        numMatched++;
+                        wildColumn = i;
+                    }
+                    if (card != tempCard
+                    && card.suit === tempCard.suit && card.value < tempCard.value){
+                        numMatched++;
+                    }
+                }
 
-            // Remove a card from the 4th column on click
-            $("#Remove4").click(function(){
-                removeCard(3);
-            });
+                if (numMatched > 1 && wildColumn != -1){
+                    for (var i = 0; i < 4; i++){
+                        var tempCard = getTopCard(i);
+                        if (card.suit === tempCard.suit && card.value < tempCard.value 
+                            || tempCard.suit === "Comodines"){
+                            highlightRemove(i, colNumber);
+                        }
+                    }
+                }
+                else if (wildColumn != -1){
+                    removeExtra = wildColumn;
+                    removeCard(colNumber);
+                    wildColumn = -1;
+                }
+                else {
+                    removeCard(colNumber);
+                }
+            }
+
+            function getTopCard(colNumber){
+                return game.cardColumns[colNumber].cards[game.cardColumns[colNumber].cards.length - 1];
+            }
+
+            for (let i = 0; i < 4; i++){
+                $("#Remove" + (i + 1)).click(function(){
+                    if (game_type == "Spanish"){
+                        removeOptions(i);
+                    }
+                    else {
+                        removeCard(i);
+                    }
+                });
+            }
 
             // Move top card from the 1st column on click
             $("#Move1").click(function () {

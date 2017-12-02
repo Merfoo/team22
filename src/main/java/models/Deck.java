@@ -1,21 +1,25 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Deck{
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
+@JsonTypeInfo(use = Id.CLASS,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @Type(value = OriginalDeck.class),
+        @Type(value = SpanishDeck.class)
+})
+public abstract class Deck{
 
     public java.util.List<Card> cards = new ArrayList<Card>(52);
-
-    public Deck(){
-        for(int i = 2; i < 15; i++){
-            cards.add(new Card(i,Suit.Clubs));
-            cards.add(new Card(i,Suit.Hearts));
-            cards.add(new Card(i,Suit.Diamonds));
-            cards.add(new Card(i,Suit.Spades));
-        }
-    }
+    protected int originalSize;
 
     public void shuffle() {
         // shuffles the cards so that it is random
@@ -35,4 +39,6 @@ public class Deck{
     }
 
     public int size() { return cards.size(); }
+
+    public int originalSize() { return originalSize; }
 }

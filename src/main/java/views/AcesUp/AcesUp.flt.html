@@ -67,7 +67,9 @@
                     <button id="openHelp" class="openButtons"><img src="/assets/images/help.png" height="60" width="60"></button>
                 </div>
                 <div id="bottomBox2" class="bottomBoxContent">
-                    <div id="dealButton">+</div>
+                    <div id="dealButton">
+                        +
+                    </div>
                 </div>
                 <div id="bottomBox3" class="bottomBoxContent">
                     <div id="motivate_img"><img src="/assets/images/motivate.jpg" height="140" width="170"></div>
@@ -213,6 +215,7 @@
                     game = data;
                 });
                 game_type = "Spanish";
+                colorButton();
             }
 
             oGameType.onclick = function(){
@@ -223,6 +226,16 @@
                     game = data;
                 });
                 game_type = "Original";
+                colorButton();
+            }
+
+            function colorButton(){
+                if (game_type == "Spanish"){
+                    deal_button.classList.add("spanish");
+                }
+                else {
+                    deal_button.classList.add("original");
+                }
             }
 
             motivate.onclick = function() {
@@ -296,7 +309,6 @@
                         moveCard(fromColumn, colIndex);
                         fromColumn = -1;
                     }
-                    console.log("Element Clicked!");
                 });
                 return elem;
             }
@@ -358,6 +370,8 @@
             // The current state of the game
             var game;
             var fromColumn = -1;
+            var wildColumn = -1;
+            var removeExtra = -1;
 
             // Updates the gui
             function display(game) {
@@ -407,6 +421,10 @@
                         console.log("Data: " + data + "\nStatus: " + status);
                         game = data;
                         display(data);
+                        if (removeExtra != -1){
+                            removeCard(removeExtra);
+                            removeExtra = -1;
+                        }
                     },
                     contentType:"application/json; charset=utf-8",
                     dataType:"json",
@@ -419,39 +437,63 @@
                 })
             }
 
-            function highlightRemove(colNumber){
-                // console.log($(".column" + (colNumber + 1) + " img:last"));
-                $(".column" + (colNumber + 1) + " img:last")[0].classList.add("removeFromColumn");
-                // console.log("")
+            function highlightRemove(colNumber, sourceCol){
+                card = $(".column" + (colNumber + 1) + " img:last")[0]
+                card.classList.add("removeFromColumn");
+                console.log("Wild Column: " + wildColumn);
+                console.log("From Column: " + sourceCol);
+                console.log("highlight Column: " + colNumber);
+                card.addEventListener("click", function(){
+                    console.log("Wild Column: " + wildColumn);
+                    console.log("From Column: " + sourceCol);
+                    console.log("highlight Column: " + colNumber);
+                    if (colNumber != wildColumn){
+                        removeCard(sourceCol);
+                    }
+                    else {
+                        removeExtra = wildColumn;
+                        removeCard(sourceCol);
+                    }
+                    wildColumn = -1;
+                })
             }
 
             function removeOptions(colNumber) {
                 var numMatched = 0;
                 var card;
-                var hasWild = false;
 
                 card = getTopCard(colNumber);
                 
                 for (var i=0; i < 4; i++){
                     var tempCard = getTopCard(i);
+                    if (tempCard == undefined){
+                        continue;
+                    }
                     if (tempCard.suit === "Comodines"){
                         numMatched++;
-                        hasWild = true;
+                        wildColumn = i;
                     }
                     if (card != tempCard
                     && card.suit === tempCard.suit && card.value < tempCard.value){
                         numMatched++;
                     }
                 }
+                console.log(wildColumn);
+                console.log(colNumber);
 
-                if (numMatched > 1 && hasWild){
+                if (numMatched > 1 && wildColumn != -1){
                     for (var i = 0; i < 4; i++){
                         var tempCard = getTopCard(i);
                         if (card.suit === tempCard.suit && card.value < tempCard.value 
                             || tempCard.suit === "Comodines"){
-                            highlightRemove(i);
+                            highlightRemove(i, colNumber);
                         }
                     }
+                }
+                else if (wildColumn != -1){
+                    removeExtra = wildColumn;
+                    removeCard(colNumber);
+                    wildColumn = -1;
                 }
                 else {
                     removeCard(colNumber);

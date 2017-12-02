@@ -438,13 +438,7 @@
             function highlightRemove(colNumber, sourceCol){
                 card = $(".column" + (colNumber + 1) + " img:last")[0]
                 card.classList.add("removeFromColumn");
-                console.log("Wild Column: " + wildColumn);
-                console.log("From Column: " + sourceCol);
-                console.log("highlight Column: " + colNumber);
                 card.addEventListener("click", function(){
-                    console.log("Wild Column: " + wildColumn);
-                    console.log("From Column: " + sourceCol);
-                    console.log("highlight Column: " + colNumber);
                     if (colNumber != wildColumn){
                         removeCard(sourceCol);
                     }
@@ -476,8 +470,6 @@
                         numMatched++;
                     }
                 }
-                console.log(wildColumn);
-                console.log(colNumber);
 
                 if (numMatched > 1 && wildColumn != -1){
                     for (var i = 0; i < 4; i++){
@@ -503,9 +495,7 @@
             }
 
             for (let i = 0; i < 4; i++){
-                console.log($("#Remove" + (i + 1)));
                 $("#Remove" + (i + 1)).click(function(){
-                    console.log("Button clicked" + i);
                     if (game_type == "Spanish"){
                         removeOptions(i);
                     }

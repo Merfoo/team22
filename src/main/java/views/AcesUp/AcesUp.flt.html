@@ -56,7 +56,7 @@
                     </div>
                     <div class="cardsColumnFooter">
                         <button id="Move4" class="moveCardFromColumn">Move</button>
-                        <button id="Remove4" class="removeCardFromColumn">Remove</button>
+                        <button id="Remove4" data-colNum=3 class="removeCardFromColumn">Remove</button>
                     </div>
                 </div>
             </div>
@@ -158,6 +158,7 @@
             var deal_button = document.getElementById('dealButton');
             var modal_text = document.getElementById('modalText');
             var html_class = document.getElementsByClassName('html')[0];
+            var game_type;
 
 
             function spanishGameMode(){
@@ -211,6 +212,8 @@
                     display(data);
                     game = data;
                 });
+                game_type = "Spanish";
+                colorButton();
             }
 
             oGameType.onclick = function(){
@@ -220,6 +223,17 @@
                     display(data);
                     game = data;
                 });
+                game_type = "Original";
+                colorButton();
+            }
+
+            function colorButton(){
+                if (game_type == "Spanish"){
+                    deal_button.classList.add("spanish");
+                }
+                else {
+                    deal_button.classList.add("original");
+                }
             }
 
             motivate.onclick = function() {
@@ -293,7 +307,6 @@
                         moveCard(fromColumn, colIndex);
                         fromColumn = -1;
                     }
-                    console.log("Element Clicked!");
                 });
                 return elem;
             }
@@ -355,6 +368,8 @@
             // The current state of the game
             var game;
             var fromColumn = -1;
+            var wildColumn = -1;
+            var removeExtra = -1;
 
             // Updates the gui
             function display(game) {
@@ -404,6 +419,10 @@
                         console.log("Data: " + data + "\nStatus: " + status);
                         game = data;
                         display(data);
+                        if (removeExtra != -1){
+                            removeCard(removeExtra);
+                            removeExtra = -1;
+                        }
                     },
                     contentType:"application/json; charset=utf-8",
                     dataType:"json",
@@ -416,25 +435,75 @@
                 })
             }
 
-            // Remove a card from the 1st column on click
-            $("#Remove1").click(function(){
-                removeCard(0);
-            });
+            function highlightRemove(colNumber, sourceCol){
+                card = $(".column" + (colNumber + 1) + " img:last")[0]
+                card.classList.add("removeFromColumn");
+                card.addEventListener("click", function(){
+                    if (colNumber != wildColumn){
+                        removeCard(sourceCol);
+                    }
+                    else {
+                        removeExtra = wildColumn;
+                        removeCard(sourceCol);
+                    }
+                    wildColumn = -1;
+                })
+            }
 
-            // Remove a card from the 2nd column on click
-            $("#Remove2").click(function(){
-                removeCard(1);
-            });
+            function removeOptions(colNumber) {
+                var numMatched = 0;
+                var card;
 
-            // Remove a card from the 3rd column on click
-            $("#Remove3").click(function(){
-                removeCard(2);
-            });
+                card = getTopCard(colNumber);
+                
+                for (var i=0; i < 4; i++){
+                    var tempCard = getTopCard(i);
+                    if (tempCard == undefined){
+                        continue;
+                    }
+                    if (tempCard.suit === "Comodines"){
+                        numMatched++;
+                        wildColumn = i;
+                    }
+                    if (card != tempCard
+                    && card.suit === tempCard.suit && card.value < tempCard.value){
+                        numMatched++;
+                    }
+                }
 
-            // Remove a card from the 4th column on click
-            $("#Remove4").click(function(){
-                removeCard(3);
-            });
+                if (numMatched > 1 && wildColumn != -1){
+                    for (var i = 0; i < 4; i++){
+                        var tempCard = getTopCard(i);
+                        if (card.suit === tempCard.suit && card.value < tempCard.value 
+                            || tempCard.suit === "Comodines"){
+                            highlightRemove(i, colNumber);
+                        }
+                    }
+                }
+                else if (wildColumn != -1){
+                    removeExtra = wildColumn;
+                    removeCard(colNumber);
+                    wildColumn = -1;
+                }
+                else {
+                    removeCard(colNumber);
+                }
+            }
+
+            function getTopCard(colNumber){
+                return game.cardColumns[colNumber].cards[game.cardColumns[colNumber].cards.length - 1];
+            }
+
+            for (let i = 0; i < 4; i++){
+                $("#Remove" + (i + 1)).click(function(){
+                    if (game_type == "Spanish"){
+                        removeOptions(i);
+                    }
+                    else {
+                        removeCard(i);
+                    }
+                });
+            }
 
             // Move top card from the 1st column on click
             $("#Move1").click(function () {
